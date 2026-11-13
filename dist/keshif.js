@@ -1,5 +1,4 @@
-import { _ as __awaiter, p as purify, s as selection, t as tippy, R as ROUND_ARROW, a as select, c as createPopper, e as extent, l as linear, b as log, m as min, d as max, n as noUiSlider, u as utcParse, f as format, g as cubicOut, h as arc, i as line, j as monotoneX, k as pointer, q as quantile, o as deviation, r as geoBounds, v as time, w as polyInOut, x as hsl, y as geoPath, z as geoTransform, A as quantize, B as linear$1, C as interpolate, D as interpolateHsl, E as rgb, F as curveLinear, G as schemeCategory10, H as polyOut, I as zoom, J as transform, L as identity, M as curveNatural, N as curveCatmullRomOpen, P as Pikaday, O as DateTime, Q as area, S as Interval, T as utcFormat, U as utcTime, V as second, W as utcMinute, X as utcHour, Y as utcDay, Z as utcSunday, $ as utcMonth, a0 as utcYear, a1 as sqrt, a2 as threshold, a3 as d3Chromatic } from './vendor.js';
-import { S as Supercluster } from './vendor_mapping.js';
+import { _ as __awaiter, p as purify, s as selection, t as tippy, R as ROUND_ARROW, a as select, c as createPopper, e as extent, l as linear, b as log, m as min, d as max, n as noUiSlider, u as utcParse, f as format, g as cubicOut, h as arc, i as line, j as monotoneX, k as pointer, q as quantile, o as deviation, r as geoBounds, v as time, w as polyInOut, x as hsl, y as geoPath, z as geoTransform, A as quantize, B as linear$1, C as interpolate, D as interpolateHsl, E as rgb, F as curveLinear, G as schemeCategory10, H as polyOut, I as zoom, J as transform, K as identity, L as curveNatural, M as curveCatmullRomOpen, N as DateTime, P as Pikaday, O as area, Q as Interval, S as utcFormat, T as utcTime, U as second, V as utcMinute, W as utcHour, X as utcDay, Y as utcSunday, Z as utcMonth, $ as utcYear, a0 as sqrt, a1 as threshold, a2 as d3Chromatic } from './vendor.js';
 
 class kshfBase {
     constructor() {
@@ -477,8 +476,8 @@ class i18n_EN {
         this.EditTitle = "Rename";
         this.RemoveRecordPanel = "Remove record panel";
         this.EmptyDashboardNotice = `To add data into the dashboard : <br><br>
-          <i class='far fa-angle-double-down'></i> switch to <span style='font-weight: bolder'>Author</span> mode,<br>and <br>
-          <i class='far fa-angle-double-left'></i> double-click, or
+          <i class='fa fa-angle-double-down'></i> switch to <span style='font-weight: bolder'>Author</span> mode,<br>and <br>
+          <i class='fa fa-angle-double-left'></i> double-click, or
           click+drag an attribute into this canvas.
           <br> <img class='kshfLogo_K'>`;
         this.LinearSequence =
@@ -487,9 +486,9 @@ class i18n_EN {
             "<span style='font-size:0.8em; opacity: 0.75'>(1,2,4,8)</span>";
         this.Log10Sequence =
             "<span style='font-size:0.8em; opacity: 0.75'>(1,10,100)</span>";
-        this.Error_CannotFindMap = (mapName) => `<i class='fal fa-frown'></i> We could not find the map [${mapName}].`;
-        this.Error_CannotLoadMap = (mapName) => `<i class='fal fa-frown'></i> We could not load the map [${mapName}].`;
-        this.Error_CannotMatchMap = (mapName) => `<i class='fal fa-frown'></i> We could not match any location name with the map [${mapName}].`;
+        this.Error_CannotFindMap = (mapName) => `<i class='fa fa-frown'></i> We could not find the map [${mapName}].`;
+        this.Error_CannotLoadMap = (mapName) => `<i class='fa fa-frown'></i> We could not load the map [${mapName}].`;
+        this.Error_CannotMatchMap = (mapName) => `<i class='fa fa-frown'></i> We could not match any location name with the map [${mapName}].`;
         // Platform-specific
         this.RemoveDataset = "Remove Dataset";
         this.Bookmark = "Bookmark<br><i>Shift+Click to delete</i>";
@@ -671,7 +670,7 @@ class Filter_Record extends Filter_Base {
     }
     /** -- */
     get title() {
-        return `<i class='far fa-times-circle></i> ${i18n.Removed}`;
+        return `<i class='fa fa-times-circle></i> ${i18n.Removed}`;
     }
     /** -- */
     onClear() {
@@ -1068,7 +1067,7 @@ class Modal {
             });
             _.filter((item) => item.helparticle)
                 .append("span")
-                .attr("class", "helparticle fal fa-question-circle")
+                .attr("class", "helparticle fa fa-question-circle")
                 .attr("data-helparticle", (item) => item.helparticle)
                 .tooltip(i18n["Learn more"], { placement: "bottom" })
                 .on("click", (event, item) => {
@@ -1210,7 +1209,7 @@ class Modal {
             .catch(() => {
             Modal.alert("Script blocking extensions (Adblock, NoScript, uBlock, ...)<br>" +
                 "may be blocking our embedded help system. " +
-                "<a href='https://docs.helpscout.net/article/911-beacon-ad-blockers' target='_blank'>Learn more</a>", "<i class='fal fa-frown'></i> Cannot display the help.");
+                "<a href='https://docs.helpscout.net/article/911-beacon-ad-blockers' target='_blank'>Learn more</a>", "<i class='fa fa-frown'></i> Cannot display the help.");
             throw new Error();
         });
     }
@@ -1711,9 +1710,13 @@ class Attrib {
     }
     applyTemplateSpecial() { }
     isEmpty() {
-        if (this._aggrs.length === 0)
-            return true;
-        return this._aggrs.every((aggr) => aggr.records.length === 0);
+        return this._aggrs.length === 0;
+    }
+    // TODO: review/remove, as we should not check for a specific type here.
+    uniqueCategories() {
+        return (this.type === "categorical" &&
+            !this.isEmpty() &&
+            this._aggrs.length === this.browser.records.length);
     }
     isFiltered() {
         var _a, _b;
@@ -1952,7 +1955,7 @@ class Attrib {
             },
             onSet: (v) => {
                 var _a;
-                this.refreshChartScale_Measure(v);
+                this.refreshScale_Measure(v);
                 (_a = this.block) === null || _a === void 0 ? void 0 : _a.refreshViz_All();
             },
         });
@@ -2036,6 +2039,9 @@ class Attrib {
     get stackedCompare() {
         return this.browser.stackedCompare.is(true);
     }
+    get stackedChart() {
+        return this.browser.stackedChart;
+    }
     vizActive(key) {
         return this.browser.vizActive(key);
     }
@@ -2099,17 +2105,18 @@ class Attrib {
         // fallback, just in case
         return this.measureExtent_Self;
     }
-    refreshChartScale_Measure(v = null) {
-        var _a, _b;
+    refreshScale_Measure(v = null) {
         v !== null && v !== void 0 ? v : (v = this.measureScaleType.get());
-        this.chartScale_Measure_prev =
-            (_b = (_a = this.chartScale_Measure) === null || _a === void 0 ? void 0 : _a.copy().clamp(false)) !== null && _b !== void 0 ? _b : null;
+        this.chartScale_Measure_prev = this.chartScale_Measure
+            ? this.chartScale_Measure.copy().clamp(false)
+            : null;
         this.measureLogBase = 10;
         this.chartScale_Measure =
             v === "log" ? d3$o.scaleLog().base(this.measureLogBase) : d3$o.scaleLinear();
         this.chartScale_Measure.clamp(true);
         if (this.chartScale_Measure_prev) {
             var domain = this.chartScale_Measure_prev.domain();
+            var range = this.chartScale_Measure_prev.range();
             if (this.measureScale_Log) {
                 if (domain[0] === 0)
                     domain[0] = 1;
@@ -2117,19 +2124,18 @@ class Attrib {
             else {
                 domain[0] = Math.min(0, domain[0]);
             }
-            this.chartScale_Measure
-                .domain(domain)
-                .range(this.chartScale_Measure_prev.range()); // same range
+            this.chartScale_Measure.domain(domain).range(range);
         }
     }
     /** -- */
     updateChartScale_Measure(skipRefreshViz = false) {
-        var _a, _b, _c, _d, _e;
+        var _a, _b, _c;
         if (!this.aggr_initialized || this.isEmpty()) {
             return; // nothing to do
         }
-        this.chartScale_Measure_prev =
-            (_b = (_a = this.chartScale_Measure) === null || _a === void 0 ? void 0 : _a.copy().clamp(false)) !== null && _b !== void 0 ? _b : null;
+        this.chartScale_Measure_prev = this.chartScale_Measure
+            ? this.chartScale_Measure.copy().clamp(false)
+            : null;
         var newDomain = this.measureDomain_Final;
         if (this.measureScale_Log && newDomain[0] === 0) {
             newDomain[0] = 1;
@@ -2138,14 +2144,14 @@ class Attrib {
         if (this.relativeBreakdown && this.browser.activeComparisonsCount > 0) {
             hideActive = newDomain[1] !== 100;
         }
-        (_d = (_c = this.block) === null || _c === void 0 ? void 0 : _c.DOM.root) === null || _d === void 0 ? void 0 : _d.classed("hideActive", hideActive);
+        (_b = (_a = this.block) === null || _a === void 0 ? void 0 : _a.DOM.root) === null || _b === void 0 ? void 0 : _b.classed("hideActive", hideActive);
         this.chartScale_Measure.domain(newDomain).range([0, this.measureRangeMax]);
         if (!skipRefreshViz && this.chartScale_Measure_prev) {
             var oldDomain = this.chartScale_Measure_prev.domain();
             if (newDomain[0] !== oldDomain[0] ||
                 newDomain[1] !== oldDomain[1] ||
                 this.measureRangeMax !== this.chartScale_Measure_prev.range()[1]) {
-                (_e = this.block) === null || _e === void 0 ? void 0 : _e.refreshViz_All();
+                (_c = this.block) === null || _c === void 0 ? void 0 : _c.refreshViz_All();
             }
         }
     }
@@ -2168,7 +2174,7 @@ class Attrib {
             return this.getPeakAggr(peakFunc, "Active");
         }
         var activeComparisons = this.activeComparisons;
-        if (this.browser.stackedChart) {
+        if (this.stackedChart) {
             // cannot add up separate maximums per selection, it needs to be accumulated per aggregate
             return peakFunc(this._aggrs, (aggr) => aggr.usedAggr
                 ? activeComparisons.reduce((accum, sT) => accum + this.browser.getChartValue(aggr, sT), 0)
@@ -2272,14 +2278,18 @@ class Config {
     }
     /** Current value to string */
     toString() {
-        let v = this.get();
+        var v = this.get();
         return i18n[this.lookup.get(v) || v];
     }
     /** Value getter */
     get() {
-        var _a, _b, _c, _d;
-        // First, check & return if there is a forced value
-        return (_d = (_b = (_a = this.forcedValue) === null || _a === void 0 ? void 0 : _a.call(this, this)) !== null && _b !== void 0 ? _b : (_c = this.onRead) === null || _c === void 0 ? void 0 : _c.call(this, this._value)) !== null && _d !== void 0 ? _d : this._value;
+        var _a, _b, _c;
+        // If we have a forcedValue function that returns a non-null value, that's our current value;
+        var forced = (_a = this.forcedValue) === null || _a === void 0 ? void 0 : _a.call(this, this);
+        if (forced != null)
+            return forced;
+        // We may run an onRead function to customize the value, or directly return the value itself.
+        return (_c = (_b = this.onRead) === null || _b === void 0 ? void 0 : _b.call(this, this._value)) !== null && _c !== void 0 ? _c : this._value;
     }
     is(v) {
         return this.get() === v;
@@ -2290,12 +2300,15 @@ class Config {
         return __awaiter(this, void 0, void 0, function* () {
             if (v == null)
                 return; // cannot set to null or undefined. (false is ok)
+            var forced = (_a = this.forcedValue) === null || _a === void 0 ? void 0 : _a.call(this, this);
+            if (forced !== null && forced === v)
+                return; // trying to set to current forced value. No need.
             if (this.preSet) {
                 try {
                     v = yield this.preSet(v, this);
                 }
                 catch (error) {
-                    if ((_a = this.parent) === null || _a === void 0 ? void 0 : _a.finalized) {
+                    if ((_b = this.parent) === null || _b === void 0 ? void 0 : _b.finalized) {
                         Modal.alert(error); // show alert only after dashboard loading
                     }
                     return;
@@ -2307,9 +2320,6 @@ class Config {
                 return; // prevent setting it to current value - no change
             this._prevValue = this._value;
             this._value = v;
-            const forced = (_b = this.forcedValue) === null || _b === void 0 ? void 0 : _b.call(this, this);
-            if (forced === v)
-                return; // trying to set to current forced value. No need to call onSet/refresh
             yield ((_c = this.onSet) === null || _c === void 0 ? void 0 : _c.call(this, this.get(), this));
             if ((_d = this.parent) === null || _d === void 0 ? void 0 : _d.refreshConfigs) {
                 this.parent.refreshConfigs();
@@ -2432,7 +2442,7 @@ class Config {
             .append("td")
             .attr("class", "configItem_Info")
             .append("span")
-            .attr("class", "fal fa-question-circle")
+            .attr("class", "fa fa-question-circle")
             .attr("data-helparticle", this.helparticle)
             .tooltip((this.tooltip ? this.tooltip + "<br><br>" : "") + "Learn more", {
             placement: "bottom",
@@ -2560,9 +2570,9 @@ var Util = {
     },
     // ***************
     sortFunc_List_Date(a, b) {
-        if (a == null)
+        if (a == null || a === "")
             return 1;
-        if (b == null)
+        if (b == null || b === "")
             return -1;
         return b.getTime() - a.getTime(); // recent first
     },
@@ -2570,19 +2580,19 @@ var Util = {
         return b - a;
     },
     /** -- */
-    toProperCase(str) {
+    toProperCase: function (str) {
         return str.toLowerCase().replace(/\b[a-z]/g, (f) => f.toUpperCase());
     },
     /** -- */
-    addUnitName(v, unitName, isSVG = false) {
+    addUnitName: function (v, unitName, isSVG = false) {
         if (!unitName)
             return (v + "").replace("G", "B"); // replace abbrevation G with B;
         var s = isSVG ? unitName : "<span class='unitName'>" + unitName + "</span>";
         return ((Util.isCurrency(unitName) ? s + v : v + s) + "").replace("G", "B"); // replace abbrevation G with B;
     },
     /** -- */
-    isCurrency(unitStr) {
-        switch (unitStr) {
+    isCurrency(v) {
+        switch (v) {
             case "$":
             case "€":
             case "₺":
@@ -2600,16 +2610,16 @@ var Util = {
             case "₲":
             case "฿":
             case "₴":
-            case "₡": // Costa Rican colon
-            case "₱": // Cuban peso
-            case "₫": // Vietnamese dong
+            case "₡": // Costa rica colon
+            case "₱": // Cuba peso
+            case "₫": // Viet nam dong
             case "₽": // Russian ruble
-            case "₹": // Indian rupee
-            case "៛": // Cambodian riel
+            case "₹": // India rupee
+            case "៛": // Cambodia riel
             case "лв":
-            case "zł": // Polish zloty
-            case "Br": // Belarusian ruble
-            case "Lek": // Albanian lek
+            case "zł": // Poland Zloty
+            case "Br": // Belarus Ruble
+            case "Lek": // Albania Lek
                 return true;
             default:
                 return false;
@@ -2618,15 +2628,17 @@ var Util = {
     /** -- */
     getTimeParseFunc(fmt) {
         // Note: new EPOCH config is %s (d3 standard method). Keeping for backwards compatibility!
-        if (fmt === "%EPOCH")
+        if (fmt === "%EPOCH") {
             return (v) => new Date(Math.floor(v * 1000));
-        if (fmt !== "%sn" && fmt !== "%SN")
+        }
+        if (fmt !== "%sn" && fmt !== "%SN") {
             return d3$n.utcParse(fmt);
+        }
         // Parse (Google) Sheet Date
         // Days are counted from December 31st 1899 and are incremented by 1
         // Decimals are fractions of a day.
         return function (v) {
-            if (v !== null) {
+            if (v && v !== "") {
                 var utc_days = Math.floor(v - 25569);
                 var utc_base = utc_days * 86400;
                 var fractional_day = v - Math.floor(v);
@@ -2642,7 +2654,7 @@ var Util = {
     /** You should only display at most 3 digits + k/m/etc */
     formatForItemCount(n, unitName = "") {
         n = Math.round(n);
-        let str;
+        var str;
         if (n < 1000 && n > -1000) {
             str = n.toString();
         }
@@ -2655,27 +2667,27 @@ var Util = {
         return Util.addUnitName(str, unitName, false);
     },
     /** -- */
-    isStepTicks(ticks) {
+    isStepTicks: function (ticks) {
         // increasing or decreasing (+/- 1)
         return (ticks.length >= 2 &&
-            ticks.every((_, i) => i === 0 ? true : Math.abs(ticks[i] - ticks[i - 1]) === 1));
+            ticks.every((v, i) => i === 0 ? true : Math.abs(ticks[i] - ticks[i - 1]) === 1));
     },
     /** -- */
-    insertMinorTicks(ticks, _scale, _out, numMinor = 4) {
+    insertMinorTicks: function (ticks, _scale, _out, numMinor = 4) {
         // if ticks[0] is larger than ticks[last], reverse
         if (ticks[0] > ticks[ticks.length - 1])
             ticks = ticks.reverse();
         for (var i = 1; i < ticks.length; i++) {
-            let _minR = ticks[i - 1];
-            const _maxR = ticks[i];
-            const _difR = (_maxR - _minR) / numMinor;
-            let _min = _scale(_minR);
-            const _max = _scale(_maxR);
-            for (let j = 1; j < numMinor; j++) {
+            var _minR = ticks[i - 1];
+            var _maxR = ticks[i];
+            var _difR = (_maxR - _minR) / numMinor;
+            var _min = _scale(_minR);
+            var _max = _scale(_maxR);
+            for (var j = 1; j < numMinor; j++) {
                 if (numMinor === 4) {
                     // base 2
-                    let x = (_min + _max) / 2;
-                    const _midR = (_minR + _maxR) / 2;
+                    var x = (_min + _max) / 2;
+                    var _midR = (_minR + _maxR) / 2;
                     _out.push({
                         tickValue: _scale.invert(x),
                         major: false,
@@ -2686,7 +2698,7 @@ var Util = {
                 }
                 else {
                     // new way
-                    let x = ticks[i - 1] + j * _difR;
+                    x = ticks[i - 1] + j * _difR;
                     _out.push({ tickValue: x, major: false, tickUnique: x });
                 }
             }
@@ -2720,31 +2732,31 @@ var Util = {
         };
         window.requestAnimationFrame(animateToTop);
     },
-    removeEmptyKeys(cfg) {
+    removeEmptyKeys: function (cfg) {
         Object.keys(cfg).forEach((key) => cfg[key] === undefined && delete cfg[key]);
     },
     // http://stackoverflow.com/questions/13627308/add-st-nd-rd-and-th-ordinal-suffix-to-a-number
-    ordinal_suffix_of(i) {
-        const j = i % 10, k = i % 100;
+    ordinal_suffix_of: function (i) {
+        var j = i % 10, k = i % 100;
         if (j == 1 && k != 11)
-            return `${i}st`;
+            return i + "st";
         if (j == 2 && k != 12)
-            return `${i}nd`;
+            return i + "nd";
         if (j == 3 && k != 13)
-            return `${i}rd`;
-        return `${i}th`;
+            return i + "rd";
+        return i + "th";
     },
     /** -- Geo-helper */
-    addMarginToBounds(bounds) {
+    addMarginToBounds: function (bounds) {
         if (!bounds.isValid())
             return bounds;
-        const NW = bounds.getNorthWest();
-        const SE = bounds.getSouthEast();
-        const dist = NW.distanceTo(SE);
-        return bounds.extend(NW.toBounds(dist / 10)).extend(SE.toBounds(dist / 10));
+        var _NW = bounds.getNorthWest();
+        var _SE = bounds.getSouthEast();
+        var dist = _NW.distanceTo(_SE);
+        return bounds.extend(_NW.toBounds(dist / 5)).extend(_SE.toBounds(dist / 5));
     },
     /** The order of data type sorting on the attribute panel */
-    getAttribTypeOrder(t) {
+    getAttribTypeOrder: (t) => {
         switch (t) {
             case "categorical":
                 return 1;
@@ -2791,7 +2803,7 @@ var Util = {
         return true;
     },
     /** -- */
-    getD3Scale(useLog) {
+    getD3Scale: function (useLog) {
         return useLog ? d3$n.scaleLog().base(2) : d3$n.scaleLinear();
     },
     /** -- */
@@ -2807,38 +2819,38 @@ var Util = {
     // http://stackoverflow.com/questions/5737975/circle-drawing-with-svgs-arc-path
     // http://stackoverflow.com/questions/15591614/svg-radial-wipe-animation-using-css3-js
     // http://jsfiddle.net/Matt_Coughlin/j3Bhz/5/
-    getPieSVGPath(_start, _angle, radius, strokeOnly) {
-        const _end = Math.min(_start + _angle, 0.999999);
-        const startRadian = (Math.PI * (360 * _start - 90)) / 180;
-        const endRadian = (Math.PI * (360 * _end - 90)) / 180;
-        const largeArcFlag = _angle > 0.5 ? 1 : 0;
+    getPieSVGPath(_start, _angle, _r, strokeOnly) {
+        var _end = Math.min(_start + _angle, 0.999999);
+        var startRadian = (Math.PI * (360 * _start - 90)) / 180;
+        var endRadian = (Math.PI * (360 * _end - 90)) / 180;
+        var largeArcFlag = _angle > 0.5 ? 1 : 0;
         return ("M " +
-            Math.cos(startRadian) * radius +
+            Math.cos(startRadian) * _r +
             "," +
-            Math.sin(startRadian) * radius +
+            Math.sin(startRadian) * _r +
             " A " +
-            radius +
+            _r +
             "," +
-            radius +
+            _r +
             " " +
             largeArcFlag +
             " " +
             largeArcFlag +
             " 1 " +
-            Math.cos(endRadian) * radius +
+            Math.cos(endRadian) * _r +
             "," +
-            Math.sin(endRadian) * radius +
+            Math.sin(endRadian) * _r +
             " " +
             (!strokeOnly ? "L0,0" : ""));
     },
     /** -- */
-    getCirclePath() {
+    getCirclePath: function () {
         return d3$n
             .arc()
             .innerRadius(0)
             .outerRadius(0.001)
             .startAngle(0)
-            .endAngle(2 * Math.PI)(null);
+            .endAngle(2 * Math.PI)();
     },
 };
 
@@ -3700,7 +3712,6 @@ class Block {
         (_a = this.DOM.nugget) === null || _a === void 0 ? void 0 : _a.classed("inDashboard", (_) => this.inDashboard);
         if (panelChanged) {
             this.refreshWidth();
-            this.refreshViz_Axis();
         }
         this.browser.refreshIsEmpty();
     }
@@ -3790,7 +3801,7 @@ class Block {
             .data([
             [
                 "Remove",
-                "far fa-times-circle",
+                "fa fa-times-circle",
                 () => {
                     this.removeFromPanel();
                     this.browser.updateLayout();
@@ -3798,10 +3809,10 @@ class Block {
             ],
             [
                 "Collapse",
-                "far fa-compress-alt",
+                "fa fa-compress-alt",
                 () => this.setCollapsedAndLayout(true),
             ],
-            ["Open", "far fa-expand-alt", () => this.setCollapsedAndLayout(false)],
+            ["Open", "fa fa-expand-alt", () => this.setCollapsedAndLayout(false)],
         ])
             .enter()
             .append("span")
@@ -3826,7 +3837,7 @@ class Block {
             .on("mousedown", (event) => event.stopPropagation());
         this.DOM.summaryConfigControl = this.DOM.summaryIcons
             .append("span")
-            .attr("class", "summaryConfigControl fal fa-cog")
+            .attr("class", "summaryConfigControl fa fa-cog")
             .tooltip(i18n.Configure, { placement: "bottom" })
             .on("click", () => {
             var open = !this.DOM.root.classed("showConfig");
@@ -3845,7 +3856,6 @@ class Block {
                 instance.reference.tippy.setContent(this.attrib.description);
             },
         });
-        this.updateDescription();
         this.DOM.headerGroup
             .append("div")
             .attr("class", "configPanel summaryConfig")
@@ -3861,7 +3871,7 @@ class Block {
             });
             summaryConfig
                 .append("div")
-                .attr("class", "compactSizeControl far fa-angle-double-up")
+                .attr("class", "compactSizeControl fa fa-angle-double-up")
                 .on("click", (event) => event.target.parentNode.classList.toggle("compact"));
             this.DOM.summaryConfig = summaryConfig
                 .append("table")
@@ -3882,7 +3892,7 @@ class Block {
         });
         this.DOM.summaryNameWrapper
             .append("div")
-            .attr("class", "summaryHeaderButton summaryLockButton far fa-clone")
+            .attr("class", "summaryHeaderButton summaryLockButton fa fa-clone")
             .tooltip("", {
             onTrigger: (instance) => {
                 instance.reference.tippy.setContent(i18n[this.browser.comparedAttrib === this.attrib
@@ -4098,14 +4108,16 @@ class Block {
                 this.attrib.chartScale_Measure_prev &&
                 !this.browser.preventAxisScaleTransition) {
                 // to transition position from previous scale, set position based on previous scale first
-                ticks = ticks
+                ticks
                     .style("opacity", 0)
                     .classed("noAnim", true)
                     .style("transform", (tick) => _transform(tick, this.attrib.chartScale_Measure_prev))
                     .classed("noAnim", false)
-                    .transition().duration(0).delay(10);
+                    .call((ticks) => finalAnim(ticks.transition().duration(0).delay(10)));
             }
-            finalAnim(ticks);
+            else {
+                finalAnim(ticks);
+            }
         })
             .merge(selection)
             .classed("major", (tick) => tick.major)
@@ -4272,7 +4284,7 @@ class Block {
         };
         dom
             .append("span")
-            .attr("class", "lockButton far fa-clone")
+            .attr("class", "lockButton fa fa-clone")
             .tooltip((_) => i18n[_.locked ? "Unlock" : "LockToCompare"], {
             placement: placement,
         })
@@ -4330,7 +4342,7 @@ class Block_Interval extends Block {
             cfgTitle: "ValueAxisZoom",
             default: false,
             UI: { disabled: true },
-            iconClass: "far fa-search",
+            iconClass: "fa fa-search",
             helparticle: "5e87ea002c7d3a7e9aea606c",
             itemOptions: [
                 { name: "Zoomed", value: true },
@@ -5440,19 +5452,21 @@ class Block_Numeric extends Block_Interval {
         }
         var _do = (withScale) => {
             this.DOM["measure_" + cT].style("transform", (aggr) => {
-                let _w = this.width_Bin;
-                let _translateX = 0;
+                var _w = this.width_Bin;
+                var _translateX = 0;
                 if (maybePartial) {
+                    var aggr_min = aggr.minV;
+                    var aggr_max = aggr.maxV;
                     // it is within the filtered range
-                    if (aggr.maxV > filter_min && aggr.minV < filter_max) {
-                        if (aggr.minV < filter_min) {
-                            var lostWidth = minPos - this.valueScale(aggr.minV);
+                    if (aggr_max > filter_min && aggr_min < filter_max) {
+                        if (aggr_min < filter_min) {
+                            var lostWidth = minPos - this.valueScale(aggr_min);
                             _translateX = lostWidth;
                             _w -= lostWidth;
                         }
-                        if (aggr.maxV > filter_max) {
+                        if (aggr_max > filter_max) {
                             _w -=
-                                this.valueScale(aggr.maxV) -
+                                this.valueScale(aggr_max) -
                                     maxPos -
                                     Base.width_HistBarGap * 2;
                         }
@@ -5461,7 +5475,7 @@ class Block_Numeric extends Block_Interval {
                         aggr.setScale(cT, 0);
                     }
                 }
-                if (!this.attrib.stackedCompare) {
+                if (!this.browser.stackedCompare) {
                     _w = _w / totalGroups;
                     _translateX = _w * curGroup;
                 }
@@ -5623,7 +5637,7 @@ class Attrib_Numeric extends Attrib_Interval {
         return ((_a = this.timeseriesParent) === null || _a === void 0 ? void 0 : _a.attribName.split("->")) || this.pathName;
     }
     constructor(browser, name, template) {
-        super(browser, name, template, "numeric", "kshfSummary_Numeric", "far fa-hashtag");
+        super(browser, name, template, "numeric", "kshfSummary_Numeric", "fa fa-hashtag");
         // has floating numbers as data points
         this.tickPrecision = 3;
         this.autoScaleType = null;
@@ -5780,15 +5794,14 @@ class Attrib_Numeric extends Attrib_Interval {
         this.intervalTickPrint = (v) => {
             if (!this.hasFloat)
                 v = Math.round(v);
-            let r = t(v);
-            let _r = v.toLocaleString();
+            var r = t(v);
+            var _r = v.toLocaleString();
             // if value is 1021 and summary doesn't have float, formatted value returns "1,021k" - Stupid!
             if (_r.length <= r.length)
                 return _r;
             if (r.substr(-1) === "m") {
-                let v = parseFloat(r) / 1000;
-                v = Math.round((v + 0.000001) * 1000) / 1000;
-                r = v.toString();
+                r = parseFloat(r) / 1000;
+                r = Math.round((r + 0.000001) * 1000) / 1000;
             }
             return r;
         };
@@ -6023,7 +6036,7 @@ class AttribDropdown {
             .attr("class", "selectButton")
             .on("click", () => this.toggle());
         this._button.append("div").attr("class", "text");
-        this._button.append("div").attr("class", "caret far fa-angle-down");
+        this._button.append("div").attr("class", "caret fa fa-angle-down");
         this._popup = this._element.append("div").attr("class", "selectOptions");
         this._element
             .append("span")
@@ -6063,7 +6076,7 @@ class AttribDropdown {
         // Update description tooltip
         var descSummary = attrib === "_measure_" ? this.browser.measureSummary : attrib;
         if (descSummary instanceof Attrib) {
-            let description = descSummary ? descSummary.description : null;
+            var description = descSummary ? descSummary.description : null;
             this._element
                 .select(".summaryDescription")
                 .style("display", description ? null : "none")
@@ -6275,7 +6288,7 @@ class ConfigPanel {
         });
         this.DOM.root
             .append("div")
-            .attr("class", "compactSizeControl far fa-angle-double-up")
+            .attr("class", "compactSizeControl fa fa-angle-double-up")
             .on("click", () => this.DOM.root.node().classList.toggle("compact"));
         this.DOM.configTable = this.DOM.root
             .append("div")
@@ -6379,7 +6392,7 @@ class Aggregate_PointCluster extends Aggregate {
 /** Can be a point object, or polygon objects */
 class Attrib_RecordGeo extends Attrib {
     constructor(browser, name, template) {
-        super(browser, name, template, "recordGeo", "", "far fa-map-marker");
+        super(browser, name, template, "recordGeo", "", "fa fa-map-marker");
         this._aggrs = [];
         // ********************************************************************
         // Filtering
@@ -6457,20 +6470,20 @@ class Attrib_RecordGeo extends Attrib {
     }
     /** -- */
     getRecordBounds(onlyIncluded) {
-        let bs = [];
+        var bs = [];
         this.browser.records.forEach((record) => {
             if (onlyIncluded && record.filteredOut)
                 return;
-            let v = this.getRecordValue(record);
+            var v = this.getRecordValue(record);
             if (!v)
                 return;
             if (!v._bounds)
                 return;
-            let b = v._bounds;
+            var b = v._bounds;
             if (isNaN(b[0][0]))
                 return;
-            let p1 = L.latLng(b[0][1], b[0][0]);
-            let p2 = L.latLng(b[1][1], b[1][0]);
+            var p1 = L.latLng(b[0][1], b[0][0]);
+            var p2 = L.latLng(b[1][1], b[1][0]);
             bs.push(p1);
             bs.push(p2);
         });
@@ -6481,29 +6494,29 @@ class Attrib_RecordGeo extends Attrib {
             if (this.pointClusterRadius === 0) {
                 return;
             }
+            if (!Supercluster) {
+                Supercluster = yield import('./vendor_mapping.js').then(function (n) { return n.s; });
+            }
             this.PointCluster = new Supercluster({
                 radius: this.pointClusterRadius,
                 maxZoom: leafletMap.getMaxZoom() - 1,
                 minZoom: leafletMap.getMinZoom(),
                 //map: (props) => ({data: props.data}),
             });
-            let points = [];
+            var points = [];
             this.records.forEach((record) => {
-                let value = this.getRecordValue(record);
-                if (value) {
-                    points.push({
-                        type: "Feature",
-                        properties: record,
-                        geometry: value.geoFeat,
-                    });
-                }
+                points.push({
+                    type: "Feature",
+                    properties: record,
+                    geometry: this.getRecordValue(record).geoFeat,
+                });
             });
             this.PointCluster.load(points);
         });
     }
     updateClusters(_bounds, zoom) {
         this.deletePointClusters();
-        let _clusters = this.PointCluster.getClusters([
+        var _clusters = this.PointCluster.getClusters([
             _bounds.getWest(),
             _bounds.getSouth(),
             _bounds.getEast(),
@@ -6517,8 +6530,8 @@ class Attrib_RecordGeo extends Attrib {
                 //
             }
             else {
-                let clusterMembers = this.PointCluster.getLeaves(cluster.id, this.maxNodeRecordSize);
-                let clusterAggr = new Aggregate_PointCluster(this, cluster);
+                var clusterMembers = this.PointCluster.getLeaves(cluster.id, this.maxNodeRecordSize);
+                var clusterAggr = new Aggregate_PointCluster(this, cluster);
                 clusterMembers.forEach((member) => {
                     let record = member.properties;
                     record._view.inCluster = true;
@@ -6558,10 +6571,10 @@ class Attrib_RecordGeo extends Attrib {
     get pointClusterRadius() {
         return this._pointClusterRadius;
     }
-    setPointClusterRadius(radius, leafletRecordMap) {
+    setPointClusterRadius(_v, leafletRecordMap) {
         return __awaiter(this, void 0, void 0, function* () {
             // must be positive integer
-            this._pointClusterRadius = Math.round(Math.max(0, radius));
+            this._pointClusterRadius = Math.round(Math.max(0, _v));
             if (this.pointClusterRadius === 0) {
                 this.deletePointClusters();
                 return;
@@ -6596,7 +6609,7 @@ class Attrib_Timeseries extends Attrib {
         throw new Error("Not applicable.");
     }
     constructor(browser, name, template) {
-        super(browser, name, template, "timeseries", "", "far fa-chart-line");
+        super(browser, name, template, "timeseries", "", "fa fa-chart-line");
         this.tickPrecision = 3;
         this.timeKeys = [];
         this.timeKeyAttribs = [];
@@ -6705,7 +6718,7 @@ class Attrib_Timeseries extends Attrib {
             return;
         for (var timeKey in this.timeKeyAttribs) {
             var attrib = this.timeKeyAttribs[timeKey];
-            attrib.attribName = `${this.attribName} <i class="far fa-calendar-day"></i> ${attrib.timeKey._time_src}`;
+            attrib.attribName = `${this.attribName} <i class="fa fa-calendar-day"></i> ${attrib.timeKey._time_src}`;
         }
         // Refresh other places which is linked to this timeseries variable
         if (this.browser.recordChartType.is("timeseries")) {
@@ -6939,7 +6952,7 @@ class Attrib_Timeseries extends Attrib {
         this.initializeAggregates(); // make sure the summary is ready
         var attrib = this.timeKeyAttribs[timePoint._time_src];
         if (!attrib) {
-            attrib = this.browser.createAttrib(`${this.attribName} <i class="far fa-calendar-day"></i> ${timePoint._time_src}`, `${this.template}->${timePoint._time_src}`, "numeric");
+            attrib = this.browser.createAttrib(`${this.attribName} <i class="fa fa-calendar-day"></i> ${timePoint._time_src}`, `${this.template}->${timePoint._time_src}`, "numeric");
             this.setTimepointAttrib(timePoint, attrib);
             attrib.initializeAggregates();
         }
@@ -6994,7 +7007,7 @@ class Attrib_Timeseries extends Attrib {
             .rangeRound([5, timeseriesWidth - 5]);
         let timeData = v._timeseries_;
         var [value_min, value_max] = d3$f.extent(timeData, (d) => d._value);
-        let steadyValue;
+        var steadyValue = false;
         if (value_min === value_max) {
             steadyValue = value_max;
             value_min -= 0.00001;
@@ -7046,7 +7059,7 @@ class Attrib_Timeseries extends Attrib {
             .attr("offset", "100%");
         _timeSeriesSvg
             .selectAll(".extentValueGroup")
-            .data(steadyValue != null ? [steadyValue] : [value_min, value_max])
+            .data(steadyValue !== false ? [steadyValue] : [value_min, value_max])
             .enter()
             .append("g")
             .attr("class", "extentValueGroup")
@@ -7092,7 +7105,7 @@ class Attrib_Timeseries extends Attrib {
                 .attr("class", "recordTimeseriesLine")
                 .datum(timeData)
                 .attr("d", Util.getLineGenerator(timeScale, valueScale))
-                .attr("stroke", steadyValue != null
+                .attr("stroke", steadyValue !== false
                 ? colorOut(mapp(value_max))
                 : "url(#GradientPath_" + _tempClipPathCounter + ")");
             _g.selectAll(".recordTimeseriesDot")
@@ -7106,7 +7119,7 @@ class Attrib_Timeseries extends Attrib {
                 .attr("fill", (d) => colorOut(mapp(d._value)))
                 .tooltip((d) => "<div class='recordColorInfo'>" +
                 "<span class='mapTooltipLabel'>" +
-                "<i class='far fa-calendar'></i> " +
+                "<i class='fa fa-calendar'></i> " +
                 d._time_src +
                 "</span><br> " +
                 "<b><span class='mapTooltipValue'>" +
@@ -7263,9 +7276,9 @@ class Block_Categorical extends Block {
             if (!this.DOM.inited)
                 return;
             this.DOM.root.attr("viewType", this.viewType);
-            this.DOM.root.selectAll(".summaryViewAs")
-                .classed("active", false);
-            this.DOM.root.selectAll(".summaryViewAs_" + this.viewType)
+            this.DOM.root.selectAll(".summaryViewAs").classed("active", false);
+            this.DOM.root
+                .selectAll(".summaryViewAs_" + this.viewType)
                 .classed("active", true);
             if (this.viewType === "list") {
                 this.list_prepView();
@@ -7340,15 +7353,16 @@ class Block_Categorical extends Block {
     }
     /** -- */
     get catLabelFontSize() {
-        if (this.heightCat > 35)
-            return 19;
-        if (this.heightCat > 30)
-            return 17;
-        if (this.heightCat > 25)
-            return 15;
+        var fontSize = this.heightCat - 2;
         if (this.heightCat > 15)
-            return 13;
-        return this.heightCat - 2;
+            fontSize = 13;
+        if (this.heightCat > 25)
+            fontSize = 15;
+        if (this.heightCat > 30)
+            fontSize = 17;
+        if (this.heightCat > 35)
+            fontSize = 19;
+        return fontSize;
     }
     hasStaticHeight() {
         return this.isView_Dropdown;
@@ -7382,7 +7396,8 @@ class Block_Categorical extends Block {
     /** -- */
     refreshHeight_Category_do() {
         this.DOM.aggrGlyphs.style("height", this.heightCat + "px");
-        this.DOM.root.selectAll(".catLabel")
+        this.DOM.root
+            .selectAll(".catLabel")
             .style("font-size", this.catLabelFontSize + "px");
         this.DOM.chartBackground.style("height", this.height_VisibleAttrib + "px");
         this.DOM.catChart.classed("multiLine", this.heightCat >= 56 && // 4x
@@ -7390,7 +7405,6 @@ class Block_Categorical extends Block {
         this.refreshViz_All();
     }
     refreshHeight() {
-        var _a;
         super.refreshHeight();
         if (this.attrib.isEmpty() || !this.inDashboard || !this.DOM.inited)
             return;
@@ -7403,7 +7417,7 @@ class Block_Categorical extends Block {
             return;
         }
         // update catCount_InDisplay
-        let c = Math.floor(this._height_Categories / this.heightCat);
+        var c = Math.floor(this._height_Categories / this.heightCat);
         if (c < 0)
             c = 1;
         if (c > this.catCount_Active)
@@ -7422,7 +7436,8 @@ class Block_Categorical extends Block {
         this.DOM.headerGroup.attr("allCatsInDisplay", this.areAllCatsInDisplay());
         if (this.isView_Map) {
             this.DOM.catMap_Base.style("height", null);
-            (_a = this.leafletAttrMap) === null || _a === void 0 ? void 0 : _a.invalidateSize();
+            if (this.leafletAttrMap)
+                this.leafletAttrMap.invalidateSize();
         }
     }
     catList_cullCategories() {
@@ -7431,9 +7446,9 @@ class Block_Categorical extends Block {
         if (!this.DOM.aggrGlyphs)
             return;
         this.DOM.aggrGlyphs
-            .style("display", (ctrgry) => ctrgry.isVisible ? null : "none")
-            .style("opacity", (ctrgry) => ctrgry.isVisible ? 1 : 0)
-            .style("transform", (ctrgry) => ctrgry.isVisible ? `translate(0px,${ctrgry.posY}px)` : null);
+            .style("display", (_cat) => (_cat.isVisible ? null : "none"))
+            .style("opacity", (_cat) => (_cat.isVisible ? 1 : 0))
+            .style("transform", (_cat) => _cat.isVisible ? `translate(0px,${_cat.posY}px)` : null);
         if (this.setAttrib && !this.setAttrib.block.pausePanning) {
             this.setAttrib.block.refreshSVGViewBox();
         }
@@ -7456,15 +7471,15 @@ class Block_Categorical extends Block {
     get width_CatText() {
         return this.isVisible() ? this.panel.width_CatText : 0;
     }
-    get width_CatBars() {
-        return this.isVisible() ? this.panel.width_CatBars : 0;
+    get width_CatChart() {
+        return this.isVisible() ? this.panel.width_CatBars : 1;
     }
     refreshWidth() {
         if (!this.DOM.summaryCategorical)
             return;
         this.attrib.updateChartScale_Measure(); // refreshes viz axis if needed
         if (this.isView_List) {
-            this.DOM.chartAxis_Measure.style("width", `${this.width_CatBars + 5}px`);
+            this.DOM.chartAxis_Measure.style("width", this.width_CatChart + 5 + "px");
         }
         if (this.isView_Map && this.mapIsReady) {
             this.leafletAttrMap.invalidateSize();
@@ -7478,7 +7493,7 @@ class Block_Categorical extends Block {
         this.DOM.catTextSearch = this.DOM.summaryControls
             .append("div")
             .attr("class", "textSearchBox catTextSearch hasLabelWidth");
-        this.DOM.catTextSearch.append("span").attr("class", "far fa-search");
+        this.DOM.catTextSearch.append("span").attr("class", "fa fa-search");
         this.DOM.catTextSearch
             .append("span")
             .attr("class", "fa fa-times-circle")
@@ -7561,19 +7576,17 @@ class Block_Categorical extends Block {
     // ********************************************************************
     // Managing in-display / visible categories
     // ********************************************************************
-    isCatActive(ctgry) {
-        if (!ctgry.usedAggr)
+    isCatActive(_cat) {
+        if (!_cat.usedAggr)
             return false;
-        if (ctgry.isFiltered())
+        if (_cat.isFiltered())
             return true;
-        if (ctgry.recCnt('Active') !== 0)
+        if (_cat.recCnt('Active') !== 0)
             return true;
-        if (this.attrib.minAggrSize.get() >= 1) {
-            if (!this.attrib.isFiltered())
-                return ctgry.recCnt('Active') !== 0;
-            if (this.viewType === "map")
-                return ctgry.recCnt('Active') !== 0;
-        }
+        if (!this.attrib.isFiltered())
+            return _cat.recCnt('Active') !== 0;
+        if (this.viewType === "map")
+            return _cat.recCnt('Active') !== 0;
         // Hide if multiple options are selected and selection is and
         //        if(this.summaryFilter.selecttype==="SelectAnd") return false;
         // TO-DO: Figuring out non-selected, zero-active-item attribs under "SelectOr" is tricky!
@@ -7584,10 +7597,10 @@ class Block_Categorical extends Block {
     }
     updateCats_IsActive() {
         this.catCount_Active = 0;
-        this._aggrs.forEach((ctrgy) => {
-            ctrgy.isActiveBefore = ctrgy.isActive;
-            ctrgy.isActive = this.isCatActive(ctrgy);
-            if (ctrgy.isActive)
+        this._aggrs.forEach((_cat) => {
+            _cat.isActiveBefore = _cat.isActive;
+            _cat.isActive = this.isCatActive(_cat);
+            if (_cat.isActive)
                 this.catCount_Active++;
         });
         if (this.attrib.catOrder_Fixed) {
@@ -7597,13 +7610,14 @@ class Block_Categorical extends Block {
     }
     updateCats_IsVisible() {
         var maxVisibleNumCats = Math.ceil((this.scrollTop_cache + this._height_Categories) / this.heightCat);
-        this._aggrs.forEach((ctgry) => {
-            ctgry.isVisibleBefore = ctgry.isVisible;
-            ctgry.isVisible = this.viewType === "map"
-                ? true
-                : ctgry.isActive &&
-                    ctgry.orderIndex >= this.firstCatIndexInView &&
-                    ctgry.orderIndex < maxVisibleNumCats;
+        this._aggrs.forEach((_cat) => {
+            _cat.isVisibleBefore = _cat.isVisible;
+            _cat.isVisible =
+                this.viewType === "map"
+                    ? true
+                    : _cat.isActive &&
+                        _cat.orderIndex >= this.firstCatIndexInView &&
+                        _cat.orderIndex < maxVisibleNumCats;
         });
     }
     // ********************************************************************
@@ -7685,7 +7699,7 @@ class Block_Categorical extends Block {
     // Overwrites base class
     chartAxis_Measure_TickSkip() {
         var _a;
-        var width = this.width_CatBars;
+        var width = this.width_CatChart;
         var widthPerTick = 35;
         if (this.attrib.getPeakAggr(d3$e.max, "Active") > 100000) {
             widthPerTick += 12; // k,m etc
@@ -7755,22 +7769,22 @@ class Block_Categorical extends Block {
             [
                 "summaryViewAs setMatrixButton",
                 "ViewSetMatrix",
-                "far fa-tags",
+                "fa fa-tags",
                 () => this.showSetMatrix(!this.show_set_matrix),
             ],
             [
                 "summaryViewAs summaryViewAs_list",
                 "ViewAsList",
-                "far fa-list-ul",
+                "fa fa-list-ul",
                 () => this.catViewAs("list"),
             ],
             [
                 "summaryViewAs summaryViewAs_map",
                 "ViewAsMap",
-                "fal fa-globe",
+                "fa fa-globe",
                 () => this.catViewAs("map"),
             ],
-        ].forEach((button) => {
+        ].forEach((button, i, arr) => {
             this.DOM.summaryIcons
                 .append("span")
                 .attr("class", button[0])
@@ -7788,7 +7802,7 @@ class Block_Categorical extends Block {
         this.attrib.noValueAggr.filtered = false;
         this.attrib.unselectAllCategories();
         this.clearCatTextSearch();
-        if (forceUpdate && this.isView_Dropdown) {
+        if (forceUpdate !== false && this.isView_Dropdown) {
             this.dropdown_refreshCategories();
         }
         (_a = this.DOM.root) === null || _a === void 0 ? void 0 : _a.classed("hasMultiAnd", false);
@@ -7847,7 +7861,7 @@ class Block_Categorical extends Block {
         var below = this.catCount_Active - bottomItem;
         var moreTxt = `<span class='rowCount ${below ? " hasMore" : ""}'>${this.catCount_Active} ${i18n.Rows}</span>`;
         if (below > 0)
-            moreTxt += ` <span class='belowCount'>${below} ${i18n.More} <span class='far fa-angle-double-down'></span></span>`;
+            moreTxt += ` <span class='belowCount'>${below} ${i18n.More} <span class='fa fa-angle-double-down'></span></span>`;
         this.DOM.scroll_display_more.html(moreTxt);
     }
     removeCatGeo() {
@@ -7864,25 +7878,25 @@ class Block_Categorical extends Block {
             return;
         // the following is temporary
         var missingRegions = [];
-        this.DOM.measure_Active.attr("d", (ctgry, i, nodes) => {
-            if (!ctgry._geo_) {
-                missingRegions.push(ctgry.label);
+        this.DOM.measure_Active.attr("d", (aggr, i, nodes) => {
+            if (!aggr._geo_) {
+                missingRegions.push(aggr.label);
                 nodes[i].parentNode.style.display = "none";
                 return;
             }
-            return this.geoPath(ctgry._geo_);
+            return this.geoPath(aggr._geo_);
         });
         this.DOM.root
             .select(".mapView-UnmatchedData")
             .classed("active", missingRegions.length > 0);
         this.DOM.measureLabel
-            .attr("transform", (ctgry) => {
-            const centroid = this.geoPath.centroid(ctgry._geo_);
+            .attr("transform", (_cat) => {
+            var centroid = this.geoPath.centroid(_cat._geo_);
             return `translate(${centroid[0]},${centroid[1]})`;
         })
-            .style("display", (ctgry) => {
-            const bounds = this.geoPath.bounds(ctgry._geo_);
-            const width = Math.abs(bounds[0][0] - bounds[1][0]);
+            .style("display", (_cat) => {
+            var bounds = this.geoPath.bounds(_cat._geo_);
+            var width = Math.abs(bounds[0][0] - bounds[1][0]);
             return width < this.width_CatMeasureLabel ? "none" : "block";
         });
     }
@@ -7908,7 +7922,7 @@ class Block_Categorical extends Block {
         this.leafletAttrMap.setMaxBounds(this.catMap_getBounds());
     }
     catMap_getBounds(onlyActive = false) {
-        const bs = [];
+        var bs = [];
         // Insert the bounds for each record path into the bs
         this._aggrs.forEach((_cat) => {
             if (!_cat._geo_)
@@ -7916,7 +7930,7 @@ class Block_Categorical extends Block {
             if (onlyActive && !_cat.isActive)
                 return;
             // get bounding box, cached in _geo_ property
-            let b = _cat._geo_._bounds;
+            var b = _cat._geo_._bounds;
             if (b === undefined) {
                 b = d3$e.geoBounds(_cat._geo_);
                 if (isNaN(b[0][0])) {
@@ -7926,8 +7940,8 @@ class Block_Categorical extends Block {
             }
             if (b === null)
                 return;
-            const p1 = L.latLng(b[0][1], b[0][0]);
-            const p2 = L.latLng(b[1][1], b[1][0]);
+            var p1 = L.latLng(b[0][1], b[0][0]);
+            var p2 = L.latLng(b[1][1], b[1][0]);
             bs.push(p1);
             bs.push(p2);
         });
@@ -7936,8 +7950,8 @@ class Block_Categorical extends Block {
         }
         return Util.addMarginToBounds(new L.latLngBounds(bs));
     }
-    catMap_invertColorTheme(v) {
-        if (v == null)
+    catMap_invertColorTheme(v = null) {
+        if (v === null)
             v = !this.invertedColorTheme; // invert
         this.invertedColorTheme = v;
         if (this.mapColorScale) {
@@ -7952,7 +7966,7 @@ class Block_Categorical extends Block {
     catMap_refreshColorScale() {
         if (!this.DOM.mapColorBlocks)
             return;
-        let colorTheme = this.browser.colorTheme.getDiscrete(9);
+        var colorTheme = this.browser.colorTheme.getDiscrete(9);
         if (this.invertedColorTheme) {
             colorTheme = colorTheme.reverse();
         }
@@ -8033,15 +8047,15 @@ class Block_Categorical extends Block {
             .append("div")
             .attr("class", "visViewControl ViewControlGroup");
         X.append("div")
-            .attr("class", "visViewControlButton far fa-plus")
+            .attr("class", "visViewControlButton fa fa-plus")
             .tooltip(i18n.ZoomIn)
             .on("click", () => this.leafletAttrMap.zoomIn());
         X.append("div")
-            .attr("class", "visViewControlButton far fa-minus")
+            .attr("class", "visViewControlButton fa fa-minus")
             .tooltip(i18n.ZoomOut)
             .on("click", () => this.leafletAttrMap.zoomOut());
         X.append("div")
-            .attr("class", "visViewControlButton viewFit far fa-expand-arrows-alt")
+            .attr("class", "visViewControlButton viewFit fa fa-expand-arrows-alt")
             .tooltip(i18n.ZoomToFit)
             .on("click", (event) => {
             this.catMap_refreshBounds_Active();
@@ -8123,7 +8137,7 @@ class Block_Categorical extends Block {
         XX.append("div")
             .attr("class", "colorThemeOptions")
             .append("div")
-            .attr("class", "editColorTheme far fa-adjust")
+            .attr("class", "editColorTheme fa fa-adjust")
             .tooltip(i18n["InvertColorTheme"])
             .on("click", () => this.catMap_invertColorTheme());
         this.mapIsReady = true;
@@ -8144,7 +8158,7 @@ class Block_Categorical extends Block {
             .range(this.invertedColorTheme ? [9, 0] : [0, 9]);
         this.DOM.mapColorScaleGroup
             .selectAll(".mapColorScaleLabels > .mapColorScaleLabel > .tickLabel")
-            .html((_d, i) => this.browser.getValueLabel(this.mapColorScale.invert((this.invertedColorTheme ? 3 - i : i) * 3)));
+            .html((d, i) => this.browser.getValueLabel(this.mapColorScale.invert((this.invertedColorTheme ? 3 - i : i) * 3)));
     }
     catMap_refreshVis(sT) {
         this.DOM.root.select(".editColorTheme").attr("data-color", sT);
@@ -8161,7 +8175,7 @@ class Block_Categorical extends Block {
             var _fill = "url(#diagonalHatch)";
             var _stroke = "#111111";
             if (_visV != null) {
-                _fill = mapColorQuantize(this.mapColorScale(_visV)).toString();
+                _fill = mapColorQuantize(this.mapColorScale(_visV));
                 _stroke = d3$e.hsl(_fill).l > 0.5 ? "#111111" : "#EEEEEE";
             }
             DOM.style.fill = _fill;
@@ -8174,7 +8188,6 @@ class Block_Categorical extends Block {
     // ********************************************************************
     list_prepView() {
         this.DOM.aggrGroup = this.DOM.aggrGroup_list;
-        this.attrib.updateChartScale_Measure(true);
         this.insertCategoryGlyphs();
         if (this.heightRow_category_dirty)
             this.refreshHeight_Category();
@@ -8320,25 +8333,25 @@ class Block_Categorical extends Block {
             var domAttrLabel = DOM_cats_new.append("span").attr("class", "catLabelGroup hasLabelWidth");
             domAttrLabel
                 .append("span")
-                .attr("class", "filterButton far fa-filter")
+                .attr("class", "filterButton fa fa-filter")
                 .tooltip(i18n.Filter)
-                .on("click", (event, ctgry) => {
-                const menuConfig = { name: "Filter", items: [] };
-                let _only = true, _and = !ctgry.filtered_AND(), _or = !ctgry.filtered_OR(), _not = !ctgry.filtered_NOT(), _remove = ctgry.isFiltered();
-                const _Or_And = this.attrib.summaryFilter.selected_OR.length > 0 ||
+                .on("click", (event, _cat) => {
+                var menuConfig = { name: "Filter", items: [] };
+                var _only = true, _and = !_cat.filtered_AND(), _or = !_cat.filtered_OR(), _not = !_cat.filtered_NOT(), _remove = _cat.isFiltered();
+                var _Or_And = this.attrib.summaryFilter.selected_OR.length > 0 ||
                     this.attrib.summaryFilter.selected_AND.length > 0;
                 if (!this.attrib.isMultiValued) {
-                    _only = !ctgry.filtered_AND();
+                    _only = !_cat.filtered_AND();
                     _and = false;
-                    _or = _or && _Or_And && !ctgry.filtered_AND();
-                    _not = _not && (!_Or_And || ctgry.filtered_AND());
+                    _or = _or && _Or_And && !_cat.filtered_AND();
+                    _not = _not && (!_Or_And || _cat.filtered_AND());
                 }
                 else {
                     _only = true;
                     _and = _and && _Or_And;
                     _or = _or && _Or_And;
                 }
-                const _label = `<span class='filterContextLabel'>${ctgry.label}</span>`;
+                var _label = `<span class='filterContextLabel'>${_cat.label}</span>`;
                 if (_remove) {
                     menuConfig.items.push({
                         id: "filterOption_Remove",
@@ -8390,7 +8403,7 @@ class Block_Categorical extends Block {
                         do: (_cat) => this.attrib.filterCategory(_cat, "NOT"),
                     });
                 }
-                Modal.popupMenu(event, menuConfig, ctgry, {
+                Modal.popupMenu(event, menuConfig, _cat, {
                     placement: "bottom-start",
                 });
                 event.stopPropagation();
@@ -8414,11 +8427,11 @@ class Block_Categorical extends Block {
                 .append("span")
                 .attr("class", "catLabelOrder fa fa-bars")
                 .tooltip(i18n["Reorder"])
-                .on("mousedown", (event, ctgry) => {
+                .on("mousedown", (event, aggr) => {
                 var catNode = event.currentTarget.parentNode.parentNode;
                 var catGroupNode = event.currentTarget.parentNode.parentNode.parentNode;
                 me.browser.DOM.root.classed("noPointerEvents", true);
-                var srcIndex = ctgry.orderIndex;
+                var srcIndex = aggr.orderIndex;
                 d3$e.select("body")
                     .on("mousemove.reordercat", function (event2) {
                     catNode.classList.add("draggedCategory");
@@ -8444,9 +8457,9 @@ class Block_Categorical extends Block {
                         skip.mult = -1;
                     }
                     // update orderIndex!
-                    ctgry.orderIndex = targetIndex;
+                    aggr.orderIndex = targetIndex;
                     me.DOM.aggrGlyphs
-                        .filter((_cat) => _cat.label !== ctgry.label) // all but the moved one
+                        .filter((_cat) => _cat.label !== aggr.label) // all but the moved one
                         .each((_cat) => {
                         if (_cat.orderIndex >= skip.from &&
                             _cat.orderIndex <= skip.to)
@@ -8477,11 +8490,11 @@ class Block_Categorical extends Block {
                 }
                 event.currentTarget.tippy.setContent(i18n.EditTitle + info);
             })
-                .on("click", function (event, ctgry) {
+                .on("click", function (event, d) {
                 this.tippy.hide();
                 if (event.shiftKey) {
-                    delete me.attrib.catLabel_attr[ctgry.id];
-                    this.nextSibling.innerHTML = purify.sanitize(ctgry.id);
+                    delete me.attrib.catLabel_attr[d.id];
+                    this.nextSibling.innerHTML = purify.sanitize(d.id);
                     return;
                 }
                 this.style.display = "none";
@@ -8492,7 +8505,7 @@ class Block_Categorical extends Block {
             domAttrLabel
                 .append("span")
                 .attr("class", "catLabel")
-                .html((ctgry) => ctgry.label)
+                .html((aggr) => aggr.label)
                 .on("focus", function () {
                 this._initValue = purify.sanitize(this.innerHTML);
                 document.execCommand("selectAll", false, null);
@@ -8503,7 +8516,7 @@ class Block_Categorical extends Block {
                 this.previousSibling.style.display = "";
                 this.previousSibling.previousSibling.style.display = "";
             })
-                .on("keydown", function (event, ctgry) {
+                .on("keydown", function (event, d) {
                 if (event.keyCode === 27) {
                     // Escape key
                     // Do not apply the new label
@@ -8520,37 +8533,37 @@ class Block_Categorical extends Block {
                         this.blur();
                         return;
                     }
-                    ctgry.label = newLabel;
-                    me.attrib.catLabel_attr[ctgry.id] = newLabel;
+                    d.label = newLabel;
+                    me.attrib.catLabel_attr[d.id] = newLabel;
                     this.blur();
                 }
             });
             var labelGroup = DOM_cats_new.append("div").attr("class", "measureLabelGroup");
-            Base.Active_Compare_List.forEach((measureType) => {
+            Base.Active_Compare_List.forEach((m) => {
                 labelGroup
                     .append("span")
-                    .attr("class", "measureLabel measureLabel_" + measureType);
+                    .attr("class", "measureLabel measureLabel_" + m);
             });
             var measureGroup = DOM_cats_new.append("div").attr("class", "measureGroup");
-            Base.Total_Active_Compare_List.forEach((measureType) => {
+            Base.Total_Active_Compare_List.forEach((t) => {
                 measureGroup
                     .append("span")
-                    .attr("class", `measure_${measureType} bg_${measureType}`)
+                    .attr("class", `measure_${t} bg_${t}`)
                     .on("mouseenter", (event, aggr) => {
                     aggr.DOM.aggrGlyph
-                        .querySelector(".measureLabel_" + measureType)
+                        .querySelector(".measureLabel_" + t)
                         .classList.add("forceShow");
-                    if (Base.Compare_List.find((_) => _ === measureType)) {
-                        this.browser.refreshAllMeasureLabels(measureType);
+                    if (Base.Compare_List.find((_) => _ === t)) {
+                        this.browser.refreshAllMeasureLabels(t);
                     }
                     event.preventDefault();
                     event.stopPropagation();
                 })
                     .on("mouseleave", (_event, aggr) => {
-                    var labelDOM = aggr.DOM.aggrGlyph.querySelector(".measureLabel_" + measureType);
+                    var labelDOM = aggr.DOM.aggrGlyph.querySelector(".measureLabel_" + t);
                     if (labelDOM)
                         labelDOM.classList.remove("forceShow");
-                    if (Base.Compare_List.find((_) => _ === measureType)) {
+                    if (Base.Compare_List.find((_) => _ === t)) {
                         this.browser.refreshAllMeasureLabels("Active");
                     }
                 });
@@ -8576,21 +8589,20 @@ class Block_Categorical extends Block {
             return;
         var _top = this.height_bar_topGap;
         var barHeight = this.barHeight_Full;
-        let labelDOM = this.DOM["measureLabel_" + sT];
-        if (this.attrib.stackedCompare && !this.panel.hiddenCatBars()) {
-            const baseline = this.measureLineZero;
-            const maxWidth = this.width_CatBars;
-            const endOfBar = !this.browser.isCompared();
-            labelDOM.each((aggr, i, nodes) => {
-                let _width = aggr.scale(sT);
-                let _left = baseline + aggr.offset(sT);
-                let _right = _left + _width;
-                let _hidden = this.browser.getMeasureValue(aggr, sT) == 0;
+        if (this.browser.stackedCompare.get() && !this.panel.hiddenCatBars()) {
+            var baseline = this.measureLineZero;
+            var maxWidth = this.width_CatChart;
+            var endOfBar = !this.browser.isCompared();
+            this.DOM["measureLabel_" + sT].each((aggr, i, nodes) => {
+                var _width = aggr.scale(sT);
+                var _left = baseline + aggr.offset(sT);
+                var _right = _left + _width;
+                var _hidden = this.browser.getMeasureValue(aggr, sT) == 0;
                 if (!_hidden && this.browser.isCompared()) {
                     _hidden = aggr.scale(sT) < this.width_CatMeasureLabel - 4;
                 }
                 // label alignment
-                let _labelAlign = Math.abs(_left - baseline) < 2
+                var _labelAlign = Math.abs(_left - baseline) < 2
                     ? "left"
                     : Math.abs(_right - maxWidth) < 2 &&
                         this.browser.relativeBreakdown
@@ -8614,11 +8626,11 @@ class Block_Categorical extends Block {
                 barHeight = barHeight / this.browser.activeComparisonsCount;
                 _top += barHeight * curGroup;
             }
-            const onlySelectedNoSplit = !this.browser.stackedChart
-                && this.attrib.isComparedAttrib()
-                && this.attrib.isMultiValued
-                && !this.splitOnSelfCompare;
-            labelDOM
+            var onlySelectedNoSplit = !this.browser.stackedChart &&
+                this.attrib.isComparedAttrib() &&
+                this.attrib.isMultiValued &&
+                !this.splitOnSelfCompare;
+            this.DOM["measureLabel_" + sT]
                 .attr("labelAlign", null)
                 .classed("hidden", (aggr) => {
                 if (onlySelectedNoSplit)
@@ -8631,7 +8643,7 @@ class Block_Categorical extends Block {
                 .style("transform", `translateY(${_top}px)`)
                 .style("width", null);
         }
-        labelDOM.style("line-height", barHeight + "px");
+        this.DOM["measureLabel_" + sT].style("line-height", barHeight + "px");
     }
     refreshDOMcats() {
         this.DOM.aggrGlyphs = this.DOM.aggrGroup
@@ -8724,31 +8736,31 @@ class Block_Categorical extends Block {
                 skip.mult = -1;
             }
             this.DOM.aggrGlyphs
-                .filter((ctgry) => ctgry.orderIndex !== selfOrder)
+                .filter((_cat) => _cat.orderIndex !== selfOrder)
                 .transition()
                 .duration(sortDelay)
-                .style("transform", (ctgry) => {
-                var offset = ctgry.orderIndex >= skip.from && ctgry.orderIndex <= skip.to
+                .style("transform", (_cat) => {
+                var offset = _cat.orderIndex >= skip.from && _cat.orderIndex <= skip.to
                     ? this.heightCat * skip.mult
                     : 0;
-                return `translate(${ctgry.posX}px, ${ctgry.posY + offset}px)`;
+                return `translate(${_cat.posX}px, ${_cat.posY + offset}px)`;
             });
             return;
         }
-        var cats_NotActiveBeforeAndNow = this.DOM.aggrGlyphs.filter((ctgry) => !ctgry.isActiveBefore && !ctgry.isActive);
-        var cats_Disappearing = this.DOM.aggrGlyphs.filter((ctgry) => ctgry.isActiveBefore && !ctgry.isActive);
-        var cats_Appearing = this.DOM.aggrGlyphs.filter((ctgry) => !ctgry.isActiveBefore && ctgry.isActive);
-        var cats_Active = this.DOM.aggrGlyphs.filter((ctgry) => ctgry.isActive);
+        var cats_NotActiveBeforeAndNow = this.DOM.aggrGlyphs.filter((_cat) => !_cat.isActiveBefore && !_cat.isActive);
+        var cats_Disappearing = this.DOM.aggrGlyphs.filter((_cat) => _cat.isActiveBefore && !_cat.isActive);
+        var cats_Appearing = this.DOM.aggrGlyphs.filter((_cat) => !_cat.isActiveBefore && _cat.isActive);
+        var cats_Active = this.DOM.aggrGlyphs.filter((_cat) => _cat.isActive);
         cats_NotActiveBeforeAndNow.style("display", "none");
         var xRemoveOffset = -100;
         // Disappear animation
         cats_Disappearing
             .transition()
             .duration(sortDelay)
-            .on("end", function (ctgry) {
+            .on("end", function (aggr) {
             this.style.opacity = 0;
-            ctgry.posX = xRemoveOffset;
-            this.style.transform = ctgry.transformPos;
+            aggr.posX = xRemoveOffset;
+            this.style.transform = aggr.transformPos;
         })
             .transition()
             .duration(1000)
@@ -8759,12 +8771,12 @@ class Block_Categorical extends Block {
         cats_Appearing
             .transition()
             .duration(sortDelay)
-            .on("end", (ctgry, i, nodes) => {
+            .on("end", (aggr, i, nodes) => {
             var node = nodes[i];
             node.style.opacity = 0;
             node.style.display = null;
-            ctgry.posX = xRemoveOffset;
-            node.style.transform = ctgry.transformPos;
+            aggr.posX = xRemoveOffset;
+            node.style.transform = aggr.transformPos;
         });
         // Sort animation
         var perCatDelay = 30;
@@ -8782,15 +8794,15 @@ class Block_Categorical extends Block {
                 x +
                 Math.min(_cat.orderIndex, this.catCount_InDisplay + 2) * perCatDelay);
         })
-            .on("end", (ctgry, i, nodes) => {
-            ctgry.posX = 0;
+            .on("end", (aggr, i, nodes) => {
+            aggr.posX = 0;
             nodes[i].style.opacity = 1;
-            nodes[i].style.transform = ctgry.transformPos;
+            nodes[i].style.transform = aggr.transformPos;
         })
             .transition()
             .duration(250)
-            .on("end", (ctgry, i, nodes) => {
-            if (!(ctgry.isVisible || ctgry.isVisibleBefore)) {
+            .on("end", (aggr, i, nodes) => {
+            if (!(aggr.isVisible || aggr.isVisibleBefore)) {
                 nodes[i].style.display = "none";
             }
         });
@@ -8807,7 +8819,7 @@ class Block_Categorical extends Block {
             return;
         if (!this.isVisible())
             return;
-        import('./vendor.js').then(function (n) { return n.a4; }).then((Choices) => {
+        import('./vendor.js').then(function (n) { return n.a3; }).then((Choices) => {
             var me = this; // callbacks set their own this context for choices library
             var cfg = {
                 searchEnabled: this._aggrs.length > 15,
@@ -8823,17 +8835,17 @@ class Block_Categorical extends Block {
                 callbackOnCreateTemplates: () => ({
                     choice(classes, obj) {
                         const el = Choices.defaults.templates.choice.call(this, classes, obj);
-                        const ctgry = me.attrib.catTable_id[obj.label];
-                        if (ctgry === null || ctgry === void 0 ? void 0 : ctgry.compared) {
-                            el.classList.add(ctgry.compared);
+                        var aggr = me.attrib.catTable_id[obj.label];
+                        if (aggr && aggr.compared) {
+                            el.classList.add(aggr.compared);
                         }
                         return el;
                     },
                     item(classes, obj) {
                         const el = Choices.defaults.templates.item.call(this, classes, obj, me.dropdown_type === "MultiSelect");
-                        const ctgry = me.attrib.catTable_id[obj.label];
-                        if (ctgry === null || ctgry === void 0 ? void 0 : ctgry.compared) {
-                            el.classList.add("bg_" + ctgry.compared);
+                        var aggr = me.attrib.catTable_id[obj.label];
+                        if (aggr && aggr.compared) {
+                            el.classList.add("bg_" + aggr.compared);
                         }
                         return el;
                     },
@@ -8849,13 +8861,13 @@ class Block_Categorical extends Block {
             this.DOM.ChoicesSelectDOM.node().addEventListener("removeItem", (event) => {
                 if (this.dropdown_type !== "MultiSelect")
                     return;
-                var ctgry = event.detail.customProperties;
-                if (!ctgry) {
+                var _cat = event.detail.customProperties;
+                if (!_cat) {
                     // choices js: Update/remove after version update of library, feature just added.
-                    ctgry = this.attrib.catTable_id[event.detail.label];
+                    _cat = this.attrib.catTable_id[event.detail.label];
                 }
-                if (ctgry)
-                    this.attrib.onAggrClick(event, ctgry);
+                if (_cat)
+                    this.attrib.onAggrClick(event, _cat);
             });
             this.DOM.ChoicesSelectDOM.node().addEventListener("choice", (_event) => {
                 var selectedCat = this.attrib.summaryFilter.selected_AND[0];
@@ -9377,10 +9389,10 @@ class Block_Set extends Block {
     }
     /** -- */
     refreshViz_Compare(cT, curGroup, totalGroups, prevCts) {
-        var strokeWidth = (_aggr) => 0;
+        var strokeWidth = (aggr) => 0;
         var aggrValue = (aggr, sT) => aggr.ratioToActive(sT);
         var usingFullSizeGlyph = this.usingFullSizeGlyph();
-        if (!this.attrib.stackedCompare) {
+        if (!this.browser.stackedCompare) {
             strokeWidth = (aggr) => (this.setPairRadius / totalGroups) *
                 (usingFullSizeGlyph ? 1 : this.getCliqueSizeRatio(aggr));
             prevCts = [];
@@ -9395,18 +9407,18 @@ class Block_Set extends Block {
             .ease(d3$d.easeLinear)
             .duration(curGroup === totalGroups - 1 && this.browser.addedCompare ? 500 : 0)
             .attrTween("d", (aggr, i, nodes) => {
-            const DOM = nodes[i];
-            const offset = prevCts.reduce((accum, sT) => accum + aggrValue(aggr, sT), 0);
-            const angleInterp = d3$d.interpolate(DOM._currentPreviewAngle, aggrValue(aggr, cT));
-            const r = this.setPairRadius *
+            var DOM = nodes[i];
+            var offset = prevCts.reduce((accum, sT) => accum + aggrValue(aggr, sT), 0);
+            var angleInterp = d3$d.interpolate(DOM._currentPreviewAngle, aggrValue(aggr, cT));
+            var r = this.setPairRadius *
                 (usingFullSizeGlyph ? 1 : this.getCliqueSizeRatio(aggr)) -
-                (this.attrib.stackedCompare
+                (this.browser.stackedCompare
                     ? 0
                     : (curGroup + 0.5) * strokeWidth(aggr)); // side-by-side radius adjust
             return (t) => {
-                const newAngle = angleInterp(t);
+                var newAngle = angleInterp(t);
                 DOM._currentPreviewAngle = newAngle;
-                return Util.getPieSVGPath(offset, newAngle, r, !this.attrib.stackedCompare);
+                return Util.getPieSVGPath(offset, newAngle, r, !this.browser.stackedCompare);
             };
         });
     }
@@ -9739,7 +9751,7 @@ class Block_Set extends Block {
     }
     /** -- */
     refreshRow_LineWidths() {
-        var setPairDiameter = this.rowHeight;
+        var setPairDiameter = this.setListSummary.barHeight.get();
         var totalWidth = this.getWidth();
         // vertical lines
         this.DOM.line_vert.each((d, i, nodes) => {
@@ -10187,7 +10199,7 @@ class Attrib_Categorical extends Attrib {
         return this._block;
     }
     get measureRangeMax() {
-        return this.block.width_CatBars;
+        return this.block.width_CatChart;
     }
     applyTemplateSpecial() {
         if (this.template.special === "Year") {
@@ -10212,7 +10224,7 @@ class Attrib_Categorical extends Attrib {
         return false;
     }
     constructor(browser, name, template) {
-        super(browser, name, template, "categorical", "kshfSummary_Categorical", "far fa-font");
+        super(browser, name, template, "categorical", "kshfSummary_Categorical", "fa fa-font");
         this._aggrs = [];
         this.catTable_id = {};
         this.removedAggrs = [];
@@ -10266,9 +10278,7 @@ class Attrib_Categorical extends Attrib {
                 { name: "6x", value: 80, max: 120 },
                 { name: "<i class='fa fa-plus'></i>", value: -100, _type: "plus" }, // special value
             ],
-            isActive: (d) => d.value &&
-                d.value <= this.barHeight.get() &&
-                d.max > this.barHeight.get(),
+            isActive: (d) => d.value && d.value <= this.barHeight.get() && d.max > this.barHeight.get(),
             onDOM: (DOM) => {
                 DOM.root.classed("catSummary_ListOnly", true);
             },
@@ -10305,7 +10315,9 @@ class Attrib_Categorical extends Attrib {
                 },
             ],
             UI: { disabled: true },
-            isActive: (d) => d.value ? this.minAggrSize.get() > 1 : this.minAggrSize.get() === 1,
+            isActive: (d) => d.value
+                ? this.minAggrSize.get() > 1
+                : this.minAggrSize.get() === 1,
             onDOM: (DOM) => {
                 DOM.root
                     .select(".minAggrSizeInput")
@@ -10319,12 +10331,13 @@ class Attrib_Categorical extends Attrib {
                     }), 500);
                 });
             },
-            preSet: (v) => __awaiter(this, void 0, void 0, function* () { return Math.max(0, v); }),
+            preSet: (v) => __awaiter(this, void 0, void 0, function* () { return Math.max(1, v); }),
             onSet: (v) => this.setMinAggrSize(v),
         });
         this.setSortingOption();
         this.finishTemplateSpecial();
     }
+    // TODO incomplete
     getAggrWithLabel(v) {
         return this.catTable_id[v];
     }
@@ -10631,7 +10644,7 @@ class Attrib_Categorical extends Attrib {
                 {
                     id: "DynamicSort",
                     name: "Active",
-                    iconClass: "fal fa-sort-amount-down",
+                    iconClass: "fa fa-sort-amount-down",
                     active: this.catSortBy === "Active",
                     helparticle: "5e87dcde04286364bc97d08e",
                     do: (summary, action) => {
@@ -10647,7 +10660,7 @@ class Attrib_Categorical extends Attrib {
                         (this.browser.comparedAttrib
                             ? `<span class='comparedSummaryName'>${this.browser.comparedAttrib.attribName}</span>`
                             : ""),
-                    iconClass: "fal fa-sort-numeric-down",
+                    iconClass: "fa fa-sort-numeric-down",
                     active: typeof this.catSortBy === "string" &&
                         this.catSortBy.startsWith("Compare"),
                     helparticle: "5e87e12704286364bc97d09e",
@@ -10670,7 +10683,7 @@ class Attrib_Categorical extends Attrib {
                 {
                     id: "AlphaNumSort",
                     name: "Alphabetical",
-                    iconClass: "fal fa-sort-alpha-down",
+                    iconClass: "fa fa-sort-alpha-down",
                     active: this.catSortBy === "alphanumeric",
                     helparticle: "5e87df292c7d3a7e9aea6032",
                     do: () => {
@@ -10683,7 +10696,7 @@ class Attrib_Categorical extends Attrib {
                     id: "CustomSort",
                     name: "Custom",
                     active: Array.isArray(this.catSortBy),
-                    iconClass: "fal fa-sort-shapes-down",
+                    iconClass: "fa fa-sort-shapes-down",
                     helparticle: "5e87ddbf2c7d3a7e9aea602e",
                     do: () => {
                         this.setFixedCatOrder();
@@ -10708,7 +10721,7 @@ class Attrib_Categorical extends Attrib {
                 {
                     id: "reverseSort",
                     name: "Inverse",
-                    iconClass: "fal fa-exchange reverseSortIcon",
+                    iconClass: "fa fa-exchange reverseSortIcon",
                     active: this.catSortInverse,
                     helparticle: "5e87e22904286364bc97d0a9",
                     do: () => this.doSortInverse(),
@@ -10753,10 +10766,9 @@ class Attrib_Categorical extends Attrib {
                 how = how !== null && how !== void 0 ? how : "MoreResults";
             }
             if (ctgry.filtered_OR()) {
-                how =
-                    (how !== null && how !== void 0 ? how : this.summaryFilter.selected_OR.length === 0)
-                        ? "MoreResults"
-                        : "LessResults";
+                how = (how !== null && how !== void 0 ? how : this.summaryFilter.selected_OR.length === 0)
+                    ? "MoreResults"
+                    : "LessResults";
             }
             ctgry.set_NONE();
             if (this.summaryFilter.selected_OR.length === 1 &&
@@ -10922,11 +10934,6 @@ class Attrib_Categorical extends Attrib {
         this.block.removeCatGeo();
         this.mapTable = null;
     }
-    uniqueCategories() {
-        return (!this.isEmpty() &&
-            this._aggrs.length === this.browser.records.length &&
-            !this.isMultiValued);
-    }
     setCatGeo_(template) {
         return __awaiter(this, void 0, void 0, function* () {
             if (!this.uniqueCategories()) {
@@ -10953,10 +10960,6 @@ class Attrib_Categorical extends Attrib {
         this._aggrs.forEach((aggr) => {
             aggr.label = this.catLabel_attr[aggr.id] || "";
         });
-        if (this.minAggrSize.get() === 0) {
-            // Generate aggregates for all labels, even if they have no record to associate with.
-            Object.keys(this.catLabel_attr).forEach((key) => this.getAggregate(key));
-        }
         (_b = (_a = this.block) === null || _a === void 0 ? void 0 : _a.DOM.catLabel) === null || _b === void 0 ? void 0 : _b.html((aggr) => aggr.label);
     }
     getRecordValue(record) {
@@ -11093,7 +11096,7 @@ class Attrib_Categorical extends Attrib {
             dropdown_type: this.block.isView_Dropdown
                 ? this.block.dropdown_type
                 : undefined,
-            filter: this.summaryFilter.exportFilter(),
+            filter: this.summaryFilter.exportFilter()
         };
         return Object.assign({}, config, t);
     }
@@ -11382,7 +11385,7 @@ class RecordView_Timeseries extends RecordView {
         this.ts_Type = new Config({
             cfgClass: "ts_Type",
             cfgTitle: "Timeseries Plot",
-            iconClass: "far fa-chart-line",
+            iconClass: "fa fa-chart-line",
             default: "Value",
             parent: this,
             helparticle: "5eaf64de042863474d1a0efc",
@@ -11400,7 +11403,7 @@ class RecordView_Timeseries extends RecordView {
             parent: this,
             cfgClass: "ts_ChangeVsTimeKey",
             cfgTitle: "Change vs.",
-            iconClass: "far fa-calendar",
+            iconClass: "fa fa-calendar",
             default: null,
             helparticle: "5e87f81e2c7d3a7e9aea60a4",
             onDOM: (DOM) => {
@@ -11441,7 +11444,7 @@ class RecordView_Timeseries extends RecordView {
             parent: this,
             cfgClass: "ts_timeKeysStep",
             cfgTitle: "Time Keys",
-            iconClass: "far fa-calendar",
+            iconClass: "fa fa-calendar",
             UISeperator: {
                 title: "Axis",
                 className: "ts_only",
@@ -11658,7 +11661,7 @@ class RecordView_Timeseries extends RecordView {
                             "<div class='recordColorInfo'>" +
                             "<div class='mapTooltipLabel'>" +
                             `<b>${me.timeseriesAttrib.attribName}</b>` +
-                            ` <i class='fal fa-calendar'></i> ${d._time_src}` +
+                            ` <i class='fa fa-calendar'></i> ${d._time_src}` +
                             "</div><br>" +
                             `<span class='mapTooltipValue'>${fullValue}</span>` +
                             "</div>";
@@ -11708,8 +11711,8 @@ class RecordView_Timeseries extends RecordView {
                     });
                 });
                 __.append("span").attr("class", limit === "min"
-                    ? "far fa-angle-double-right"
-                    : "far fa-angle-double-left");
+                    ? "fa fa-angle-double-right"
+                    : "fa fa-angle-double-left");
             });
             this.refreshTimeSeriesRangeOpts();
             // ******************************************************
@@ -12999,15 +13002,16 @@ class RecordView_Map extends RecordView {
                 // When zoom is triggered by fly, the leaflet-zoom-anim is not set.
                 .on("zoomstart", () => {
                 resetPointSizes.call(this);
-                d3$9.select(this.leafletRecordMap.getPane("mapPane"))
-                    .classed("leaflet-zoom-anim", true);
+                var _ = d3$9.select(this.leafletRecordMap.getPane("mapPane"));
+                _.classed("leaflet-zoom-anim", true);
             })
                 .on("zoomend", () => {
-                d3$9.select(this.leafletRecordMap.getPane("mapPane"))
-                    .classed("leaflet-zoom-anim", false);
+                var _ = d3$9.select(this.leafletRecordMap.getPane("mapPane"));
+                _.classed("leaflet-zoom-anim", false);
             });
             if (!this.mapConfig.tileConfig.disabled) {
-                this.leafletRecordMap.addLayer(new L.TileLayer(this.mapConfig.tileTemplate, this.mapConfig.tileConfig));
+                let leafletTileLayer = new L.TileLayer(this.mapConfig.tileTemplate, this.mapConfig.tileConfig);
+                this.leafletRecordMap.addLayer(leafletTileLayer);
             }
             this.leafletRecordMap.attributionControl.setPosition("topright");
             this.recordGeoPath = d3$9.geoPath().projection(d3$9.geoTransform({
@@ -13078,10 +13082,10 @@ class RecordView_Map extends RecordView {
             else if (t === "geo") {
                 this.rd.config.geo = this.geoAttrib.attribName;
                 this.DOM.root.attr("data-geotype", this.geoAttrib.geoType);
-                this.DOM.root.select(".mapView-UnmatchedData")
+                this.DOM.root
+                    .select(".mapView-UnmatchedData")
                     .classed("active", this.geoAttrib.noValueAggr.records.length > 0);
                 if (this.geoAttrib.geoType === "Point") {
-                    this.geoAttrib.setPointClusterRadius(this.rd.config.pointClusterRadius, this.leafletRecordMap);
                     // size
                     if (!this.rd.codeBy.size && this.rd.config.sizeBy) {
                         yield this.rd.setAttrib("size", this.rd.config.sizeBy);
@@ -13102,9 +13106,10 @@ class RecordView_Map extends RecordView {
             return;
         // update rendering of point clusters
         if (this.rd.hasAggregates()) {
+            var sideBySide = this.browser.stackedCompare.is(false);
             // compute "offset" for each aggregate
             this.geoAttrib._aggrs.forEach((aggr) => {
-                let _offset = 0;
+                var _offset = 0;
                 aggr._glyphOrder = {};
                 // re-order the comparisons so that the larger ones come first
                 this.browser.activeComparisons
@@ -13116,8 +13121,7 @@ class RecordView_Map extends RecordView {
                     _offset += aggr.measure(cT2);
                 });
             });
-            const sideBySide = this.browser.stackedCompare.is(false);
-            const numComparisons = this.browser.activeComparisonsCount;
+            var numComparisons = this.browser.activeComparisonsCount;
             this.browser.activeComparisons.forEach((cT2) => {
                 this.DOM["clusterGlyphs_" + cT2]
                     .style("stroke-width", (aggr) => {
@@ -13129,19 +13133,19 @@ class RecordView_Map extends RecordView {
                     .ease(d3$9.easePoly.exponent(3))
                     .duration(700)
                     .attrTween("d", (aggr, i, nodes) => {
-                    const DOM = nodes[i];
-                    const offset = sideBySide
+                    var DOM = nodes[i];
+                    var offset = sideBySide
                         ? 0
                         : aggr.offset(cT2) / (aggr.measure("Active") || 1);
-                    const angleInterp = d3$9.interpolate(DOM._currentPreviewAngle, aggr.ratioToActive(cT2));
-                    let r = aggr.cluster._radius;
+                    var angleInterp = d3$9.interpolate(DOM._currentPreviewAngle, aggr.ratioToActive(cT2));
+                    var r = aggr.cluster._radius;
                     if (sideBySide) {
                         r -=
                             (aggr._glyphOrder[cT2] + 0.5) *
                                 (aggr.cluster._radius / numComparisons);
                     }
                     return (t) => {
-                        const newAngle = angleInterp(t);
+                        var newAngle = angleInterp(t);
                         DOM._currentPreviewAngle = newAngle;
                         return Util.getPieSVGPath(offset, newAngle, r - 1, sideBySide);
                     };
@@ -13151,18 +13155,19 @@ class RecordView_Map extends RecordView {
         // normal comparison rendering
         super.refreshSelect_Compare(cT, status);
     }
-    constructor(rd, _config) {
+    constructor(rd, config) {
         super(rd);
         this.zoomedBefore = false;
     }
     refreshQueryBox_Filter(bounds = null) {
         if (this.rd.collapsed)
             return;
-        let isVisible = false;
+        var _left, _right, _top, _bottom;
+        var isVisible = false;
         if (typeof L === "undefined") {
             throw Error("Leaflet not initialized");
         }
-        let north_west, south_east;
+        var north_west, south_east;
         if (bounds === null) {
             isVisible = this.geoAttrib.isFiltered();
             if (!isVisible)
@@ -13177,10 +13182,10 @@ class RecordView_Map extends RecordView {
         else {
             throw Error("Invalud value");
         }
-        let _left = north_west.x;
-        let _right = south_east.x;
-        let _top = north_west.y;
-        let _bottom = south_east.y;
+        _left = north_west.x;
+        _right = south_east.x;
+        _top = north_west.y;
+        _bottom = south_east.y;
         this.rd.DOM.recordDisplayWrapper
             .select(".recordBase_Map  .spatialQueryBox_Filter")
             .classed("active", bounds || isVisible)
@@ -13195,7 +13200,7 @@ class RecordView_Map extends RecordView {
         setTimeout(() => this.leafletRecordMap.invalidateSize(), delayMs);
     }
     /** -- */
-    refreshAttribUnitName(_attrib) {
+    refreshAttribUnitName(attrib) {
         this.rd.refreshColorLegendTicks();
     }
     /** -- */
@@ -13232,7 +13237,7 @@ class RecordView_Map extends RecordView {
         this.leafletRecordMap.setMaxBounds(Util.addMarginToBounds(this.geoAttrib.getRecordBounds(false)));
     }
     translate_glyph(v) {
-        let point = this.leafletRecordMap.latLngToLayerPoint(new L.latLng(v[1], v[0]));
+        var point = this.leafletRecordMap.latLngToLayerPoint(new L.latLng(v[1], v[0]));
         return `translate(${point.x},${point.y})`;
     }
     /** -- */
@@ -13269,7 +13274,7 @@ class RecordView_Map extends RecordView {
                 // filter - TODO needs to have its own filter logic
                 return;
             }
-            let latlong = aggr.cluster.geometry.coordinates;
+            var latlong = aggr.cluster.geometry.coordinates;
             this.leafletRecordMap.setZoomAround(new L.latLng(latlong[1], latlong[0]), this.leafletRecordMap.getZoom() + 1);
         })
             .call((clusterGlyph) => {
@@ -13323,12 +13328,12 @@ class RecordView_Map extends RecordView {
             return;
         if (!this.rd.recordRadiusScale)
             return;
-        let clusterArc = d3$9
+        var clusterArc = d3$9
             .arc()
             .innerRadius(0)
             .startAngle(0)
             .endAngle(2 * Math.PI);
-        let circleDraw = (aggr) => clusterArc.outerRadius(aggr.cluster._radius)(null);
+        var circleDraw = (aggr) => clusterArc.outerRadius(aggr.cluster._radius)();
         this.DOM.clusterGlyphs
             .each((aggr) => {
             aggr.cluster._radius = this.rd.recordRadiusScale(aggr.Active.measure);
@@ -13348,9 +13353,9 @@ class RecordView_Map extends RecordView {
         }
         else {
             this.DOM.clusterGlyphs_Active.each((cluster, i, nodes) => {
-                let v = cluster.Active.measure;
-                let _fill = v != null ? this.rd.recordColorScale(v) : "url(#diagonalHatch)";
-                let darkBg = v != null ? d3$9.hsl(_fill).l < 0.6 : false;
+                var v = cluster.Active.measure;
+                var _fill = v != null ? this.rd.recordColorScale(v) : "url(#diagonalHatch)";
+                var darkBg = v != null ? d3$9.hsl(_fill).l < 0.6 : false;
                 nodes[i].style.fill = _fill;
                 // to adjust text color by background luminance
                 nodes[i].parentNode.parentNode.classList[darkBg ? "add" : "remove"]("darkBg");
@@ -13358,11 +13363,11 @@ class RecordView_Map extends RecordView {
         }
         this.refreshSelect_Compare();
     }
-    /**
+    /** --
      * Returns the records that fit/intersect within the bounds (if point) or has geofeat (if polygon)
-     */
+     **/
     getRecordsForDOM() {
-        let bounds = this.leafletRecordMap.getBounds();
+        var bounds = this.leafletRecordMap.getBounds();
         return this.browser.records.filter((record) => {
             var _a;
             var _feat = (_a = this.geoAttrib.getRecordValue(record)) === null || _a === void 0 ? void 0 : _a.geoFeat;
@@ -13384,16 +13389,16 @@ class RecordView_Map extends RecordView {
         if (this.colorAttrib) {
             if (!this.rd.recordColorScale)
                 return;
-            let s_f;
-            let s_log = false;
-            let s_ts = (_record) => false;
+            var s_f;
+            var s_log = false;
+            var s_ts = (_record) => false;
             if (this.colorAttrib instanceof Attrib_Interval) {
                 s_f = this.colorAttrib.template.func;
                 s_log = this.colorAttrib.isValueScale_Log;
                 if (this.colorAttrib.hasTimeSeriesParent()) {
-                    let f_ps = this.colorAttrib.timeseriesParent.template.func;
+                    var f_ps = this.colorAttrib.timeseriesParent.template.func;
                     s_ts = function (record) {
-                        let _ = f_ps.call(this, record);
+                        var _ = f_ps.call(this, record);
                         if (!_ || !_._timeseries_)
                             return false;
                         return _._timeseries_.length === 0;
@@ -13409,11 +13414,11 @@ class RecordView_Map extends RecordView {
             this.DOM.kshfRecords_Path.each((record, i, nodes) => {
                 if (record.filteredOut)
                     return;
-                let DOM = nodes[i];
-                let _fill = "url(#diagonalHatch)";
-                let _stroke = "#111111";
-                let darkBg = false;
-                let v = s_f.call(record.data, record);
+                var DOM = nodes[i];
+                var _fill = "url(#diagonalHatch)";
+                var _stroke = "#111111";
+                var darkBg = false;
+                var v = s_f.call(record.data, record);
                 if (v === "" || v == null || typeof v !== "number" || (s_log && v <= 0))
                     v = null;
                 if (v != null) {
@@ -13561,7 +13566,7 @@ class RecordView_Scatter extends RecordView {
         });
         this.scatterZoom = d3$8
             .zoom()
-            .filter(() => this.rd.visMouseMode === "pan" && this.rd.curHeight > 0)
+            .filter(() => this.rd.visMouseMode === "pan" && this.rd.curHeight)
             .scaleExtent([1, 8]) // 1 covers the whole dataset. 2 is double-zoom-in.
             .on("start", () => {
             this.DOM.recordDisplayWrapper.classed("dragging", true);
@@ -13624,7 +13629,7 @@ class RecordView_Scatter extends RecordView {
                 event.stopPropagation();
             })
                 .append("i")
-                .attr("class", "far fa-exchange");
+                .attr("class", "fa fa-exchange");
             // recordAxis_X, recordAxis_Y
             ["X", "Y"].forEach((a) => {
                 this.DOM["recordAxis_" + a] = this.DOM.recordBase_Scatter
@@ -14261,6 +14266,9 @@ const d3$7 = {
     curveMonotoneX: monotoneX,
     easePoly: polyInOut,
 };
+// All dates are based on UTC.
+// Since dates are created with zone offset by default, need to offset them back sometimes
+var offsetUTC = DateTime.now().offset;
 class Block_Timestamp extends Block_Interval {
     constructor(attrib) {
         super(attrib);
@@ -14274,20 +14282,20 @@ class Block_Timestamp extends Block_Interval {
         if (!this.isVisible() || !this.DOM.aggrGlyphs)
             return;
         super.refreshViz_Active();
-        this.updateViz_Areas("Active", !this.attrib.stackedCompare && this.browser.activeComparisonsCount > 0);
+        this.updateViz_Areas("Active", !this.browser.stackedCompare && this.browser.activeComparisonsCount > 0);
     }
     /** - */
     refreshViz_Compare(cT, curGroup, totalGroups, prevCts = []) {
         if (!this.isVisible() || !this.DOM.aggrGlyphs)
             return;
         super.refreshViz_Compare(cT, curGroup, totalGroups, prevCts);
-        if (this.attrib.stackedCompare &&
+        if (this.browser.stackedCompare &&
             this.browser.addedCompare &&
             curGroup === totalGroups - 1) {
             // smoother animation, sets it as a chart-line at offset first - instead of area chart
             this.DOM["measure_Area_" + cT].attr("d", this.getVizArea(cT, true));
         }
-        this.updateViz_Areas(cT, !this.attrib.stackedCompare);
+        this.updateViz_Areas(cT, !this.browser.stackedCompare);
     }
     /** -- */
     insertVizDOM() {
@@ -14381,12 +14389,9 @@ class Block_Timestamp extends Block_Interval {
             return;
         var skipSelect = false;
         var pikaday = DOM.pikaday;
-        // All dates are based on UTC.
-        // Since dates are created with zone offset by default, need to offset them back sometimes
-        var offsetUTC = DateTime.now().offset;
         var refreshPikadayDate = () => {
             var aggr = this.attrib.summaryFilter.active;
-            var _date = DateTime.fromJSDate(d === "min" ? aggr.minV : aggr.maxV, { zone: 'UTC' })
+            var _date = DateTime.fromJSDate(d === "min" ? aggr.minV : aggr.maxV)
                 .plus({ minutes: -offsetUTC })
                 .toJSDate();
             skipSelect = true;
@@ -14405,7 +14410,7 @@ class Block_Timestamp extends Block_Interval {
                         return;
                     }
                     var selectedDate = this.getDate();
-                    selectedDate = DateTime.fromJSDate(selectedDate, { zone: 'UTC' })
+                    selectedDate = DateTime.fromJSDate(selectedDate)
                         // need to convert value to UTC
                         .plus({ minutes: offsetUTC })
                         .toJSDate();
@@ -14482,6 +14487,8 @@ const d3$5 = {
     utcYear,
 };
 // All dates are based on UTC.
+// Since dates are created with zone offset by default, need to offset them back sometimes
+DateTime.now().offset;
 class Attrib_Timestamp extends Attrib_Interval {
     /** -- */
     initTimeTyped() {
@@ -14517,7 +14524,7 @@ class Attrib_Timestamp extends Attrib_Interval {
         });
     }
     constructor(browser, name, template) {
-        super(browser, name, template, "timestamp", "kshfSummary_Timestamp", "far fa-calendar-day");
+        super(browser, name, template, "timestamp", "kshfSummary_Timestamp", "fa fa-calendar-day");
         this._block = new Block_Timestamp(this);
         this.timeAxis_XFunc = (aggr) => (this.valueScale(aggr.minV) + this.valueScale(aggr.maxV)) / 2;
         this.configs.showHistogram.cfgTitle = "Line Chart"; // customize from "Histogram"
@@ -14593,13 +14600,13 @@ class Attrib_Timestamp extends Attrib_Interval {
     }
     refreshValueScale() {
         super.refreshValueScale();
-        let maxScale = d3$5["utc" + this.timeTyped.finestRes()];
+        var maxScale = d3$5["utc" + this.timeTyped.finestRes()];
         if (this.intervalTicks.some((tick) => maxScale(tick) < tick)) {
-            let nicing = maxScale;
+            var nicing = maxScale;
             this.valueScale = this.getValueScaleObj()
                 .domain(this.rangeActive)
                 .range([0, this.block.width_histogram])
-                .nice(maxScale);
+                .nice(nicing);
             this.intervalTicks = this.valueScale.ticks(nicing);
         }
     }
@@ -14792,7 +14799,7 @@ class RecordView_List extends RecordView {
         this.list_sparklineVizWidth = new Config({
             cfgClass: "list_sparklineVizWidth",
             cfgTitle: "Sparkline Width",
-            iconClass: "far fa-chart-line",
+            iconClass: "fa fa-chart-line",
             default: 120,
             parent: this,
             helparticle: "5e87f16904286364bc97d0e2",
@@ -14869,8 +14876,7 @@ class RecordView_List extends RecordView {
             "list_sparklineVizWidth",
             "list_gridRecordWidth",
         ].forEach((t) => {
-            this[t].set(config[t]);
-            // copy config object to record display as well.
+            this[t].val = config[t];
             this.rd.configs[t] = this[t];
             this.rd.recordConfigPanel.insertConfigUI(this[t]);
         });
@@ -15096,10 +15102,9 @@ class RecordView_List extends RecordView {
         this.refreshRecordVis();
         this.refreshRecordDOMOrder();
     }
-    /**
-     * Sort all records given the active sort option
-     * Records are only sorted on init & when active sorting option changes.
-     * They are not resorted on filtering.
+    /** Sort all records given the active sort option
+     *  Records are only sorted on init & when active sorting option changes.
+     *  They are not resorted on filtering.
      */
     sortRecords() {
         var attrib = this.sortAttrib;
@@ -15125,7 +15130,8 @@ class RecordView_List extends RecordView {
     }
     /** Returns the sort value type for given sort Value function */
     getSortFunc(sortValueFunc) {
-        var sortValueFunction;
+        // 0: string, 1: date, 2: others
+        var sortValueFunction = Util.sortFunc_List_Number;
         // find appropriate sortvalue type
         for (var k = 0, same = 0; true; k++) {
             if (same === 3 || k === this.browser.records.length)
@@ -15134,28 +15140,29 @@ class RecordView_List extends RecordView {
             var f = sortValueFunc.call(item.data, item);
             if (f == null || f === "")
                 continue;
-            var sortValueType_tmp;
+            var sortValueType_temp2;
             switch (typeof f) {
                 case "string":
-                    sortValueType_tmp = Util.sortFunc_List_String;
+                    sortValueType_temp2 = Util.sortFunc_List_String;
                     break;
                 case "number":
-                    sortValueType_tmp = Util.sortFunc_List_Number;
+                    sortValueType_temp2 = Util.sortFunc_List_Number;
                     break;
                 case "object":
-                    sortValueType_tmp = (f instanceof Date)
-                        ? Util.sortFunc_List_Date
-                        : Util.sortFunc_List_Number;
+                    if (f instanceof Date)
+                        sortValueType_temp2 = Util.sortFunc_List_Date;
+                    else
+                        sortValueType_temp2 = Util.sortFunc_List_Number;
                     break;
                 default:
-                    sortValueType_tmp = Util.sortFunc_List_Number;
+                    sortValueType_temp2 = Util.sortFunc_List_Number;
                     break;
             }
-            if (sortValueType_tmp === sortValueFunction) {
+            if (sortValueType_temp2 === sortValueFunction) {
                 same++;
             }
             else {
-                sortValueFunction = sortValueType_tmp;
+                sortValueFunction = sortValueType_temp2;
                 same = 0;
             }
         }
@@ -15251,7 +15258,7 @@ class RecordView_List extends RecordView {
         }
         else if (this.list_sortVizRange.is("dynamic")) {
             // dynamic - based on filtered data
-            let [minV, maxV] = d3$4.extent(this.browser.records, (record) => {
+            var [minV, maxV] = d3$4.extent(this.browser.records, (record) => {
                 return record.filteredOut
                     ? null
                     : this.sortAttrib.getRecordValue(record);
@@ -15270,10 +15277,7 @@ class RecordView_List extends RecordView {
         if (!this.isComparable())
             return;
         // Shows evenly spaces pies next to records, filling in colors of all comparisons
-        var arcGen = d3$4.arc()
-            .innerRadius(10)
-            .outerRadius(100)
-            .padAngle(0.15);
+        var arcGen = d3$4.arc().innerRadius(10).outerRadius(100).padAngle(0.15);
         var records = this.DOM.kshfRecords.filter((record) => {
             if (!record.isIncluded)
                 return false;
@@ -15287,15 +15291,14 @@ class RecordView_List extends RecordView {
             records = records.filter((record) => record.isSelected(cT) !== status);
         }
         records.each((record) => {
-            let numPies = record.activeComparisons.length || 1;
-            let arcLen = (2 * Math.PI) / numPies;
-            let d = d3$4.select(record.DOM.record);
+            var numPies = record.activeComparisons.length || 1;
+            var arcLen = (2 * Math.PI) / numPies;
+            var d = d3$4.select(record.DOM.record);
             record.activeComparisons.forEach((cT, i) => {
                 d.select(".glyph_" + cT).attr("d", arcGen({
                     startAngle: arcLen * i,
                     endAngle: arcLen * (i + 1),
-                }) // has other settings specified above
-                );
+                }));
             });
         });
     }
@@ -15418,11 +15421,12 @@ class RecordView_List extends RecordView {
         _.append("path")
             .attr("class", "timeline")
             .attr("d", (record) => {
+            var _a;
             var lineData = ts.getRecordValue(record);
             if (!lineData || !lineData.extent_Value_raw)
                 return;
             valueScale.domain(lineData.extent_Value_raw);
-            return Util.getLineGenerator(timeScale, valueScale)(lineData._timeseries_);
+            return Util.getLineGenerator(timeScale, valueScale)((_a = ts.getRecordValue(record)) === null || _a === void 0 ? void 0 : _a._timeseries_);
         });
         var __ = _.append("g")
             .attr("transform", dotPosition)
@@ -15432,7 +15436,7 @@ class RecordView_List extends RecordView {
             var nearestTimeKey = ts.timeKeys[0];
             ts.timeKeys.some((_key) => {
                 // _keys are sorted from early to late
-                var timeDif = Math.abs(+_key._time - (+_time));
+                var timeDif = Math.abs(+_key._time - _time);
                 if (timeDif > currentDif)
                     return true; // difference increases, we had just found the right key
                 currentDif = timeDif;
@@ -15745,7 +15749,7 @@ class RecordDisplay {
             var _converted = [];
             Object.keys(config.timeSeriesAnnotations).forEach((_k) => {
                 var _v = config.timeSeriesAnnotations[_k];
-                var _t = DateTime.fromFormat(_v, "MM/DD/YYYY", { zone: "UTC" });
+                var _t = DateTime.fromFormat(_v, DateTime.DATE_SHORT, { zone: "UTC" });
                 if (_t.isValid) {
                     _converted.push({ _time: _t.toJSDate(), _time_src: _k, _text: _v });
                 }
@@ -16075,19 +16079,19 @@ class RecordDisplay {
         // Remove record display button
         this.DOM.removeRecordPanelButton = this.DOM.recordDisplayHeader
             .append("div")
-            .attr("class", "removeRecordPanelButton far fa-times-circle")
+            .attr("class", "removeRecordPanelButton fa fa-times-circle")
             .tooltip(i18n.RemoveRecordPanel, { placement: "bottom" })
             .on("click", () => __awaiter(this, void 0, void 0, function* () { return yield this.browser.recordChartType.set("none"); }));
         // Expand record display button
         this.DOM.recordDisplayHeader
             .append("div")
-            .attr("class", "buttonRecordViewExpand far fa-expand-alt")
+            .attr("class", "buttonRecordViewExpand fa fa-expand-alt")
             .tooltip(i18n.OpenSummary, { placement: "bottom" })
             .on("click", () => this.collapseRecordViewSummary(false));
         // Collapse record display button
         this.DOM.recordDisplayHeader
             .append("div")
-            .attr("class", "buttonRecordViewCollapse far fa-compress-alt")
+            .attr("class", "buttonRecordViewCollapse fa fa-compress-alt")
             .tooltip(i18n.CollapseSummary, { placement: "bottom" })
             .on("click", () => this.collapseRecordViewSummary(true));
         this.initDOM_GlobalTextSearch();
@@ -16098,7 +16102,7 @@ class RecordDisplay {
             .html(this.browser.recordName);
         this.DOM.recordDisplayConfigButton = this.DOM.recordDisplayHeader
             .append("span")
-            .attr("class", "recordDisplayConfigButton fal fa-cog")
+            .attr("class", "recordDisplayConfigButton fa fa-cog")
             .tooltip(i18n.Configure)
             .on("click", (event) => {
             this.recordConfigPanel.showAtPos(event.target.offsetLeft + 25, event.target.offsetTop + 25);
@@ -16112,27 +16116,27 @@ class RecordDisplay {
             {
                 v: "list",
                 t: i18n.ListButton,
-                i: "<span class='far fa-list-ul'></span>",
+                i: "<span class='fa fa-list-ul'></span>",
             },
             {
                 v: "map",
                 t: i18n.MapButton,
-                i: "<span class='fal fa-globe'></span>",
+                i: "<span class='fa fa-globe'></span>",
             },
             {
                 v: "node",
                 t: i18n.NodeButton,
-                i: "<span class='far fa-share-alt'></span>",
+                i: "<span class='fa fa-share-alt'></span>",
             },
             {
                 v: "timeseries",
                 t: i18n.TimeSeriesButton,
-                i: "<span class='far fa-chart-line'></span>",
+                i: "<span class='fa fa-chart-line'></span>",
             },
             {
                 v: "scatter",
                 t: i18n.ScatterButton,
-                i: "<span class='far fa-chart-scatter'></span>",
+                i: "<span class='fa fa-chart-scatter'></span>",
             },
         ])
             .enter()
@@ -16147,7 +16151,7 @@ class RecordDisplay {
         this.DOM.recordTextSearch = this.DOM.recordDisplayHeader
             .append("span")
             .attr("class", "recordTextSearch textSearchBox");
-        this.DOM.recordTextSearch.append("span").attr("class", "far fa-search");
+        this.DOM.recordTextSearch.append("span").attr("class", "fa fa-search");
         this.DOM.recordTextSearch
             .append("span")
             .attr("class", "fa fa-times-circle")
@@ -16279,14 +16283,14 @@ class RecordDisplay {
             .call((dom) => {
             dom
                 .append("i")
-                .attr("class", "dotSize dotSize-expand-alt far fa-plus")
+                .attr("class", "dotSize dotSize-expand-alt fa fa-plus")
                 .tooltip(i18n.Larger, { placement: "top" })
                 .on("click", () => __awaiter(this, void 0, void 0, function* () {
                 yield this.recordPointSize.set(this.recordPointSize.get() * Math.sqrt(2));
             }));
             dom
                 .append("i")
-                .attr("class", "dotSize dotSize-compress-alt far fa-minus")
+                .attr("class", "dotSize dotSize-compress-alt fa fa-minus")
                 .tooltip(i18n.Smaller, { placement: "top" })
                 .on("click", () => __awaiter(this, void 0, void 0, function* () {
                 yield this.recordPointSize.set(this.recordPointSize.get() / Math.sqrt(2));
@@ -16324,7 +16328,7 @@ class RecordDisplay {
                 var _theme = me.browser.activeColorTheme;
                 var _temp = me.browser.colorTheme[_theme];
                 me.browser.colorTheme[_theme] = this.value;
-                let colors = me.browser.colorTheme.getDiscrete(9);
+                var colors = me.browser.colorTheme.getDiscrete(9);
                 me.browser.colorTheme[_theme] = _temp;
                 if (me.invertedColorTheme)
                     colors = colors.reverse();
@@ -16344,14 +16348,14 @@ class RecordDisplay {
                     {
                         id: "colorThemeInverse",
                         name: "Invert",
-                        iconClass: "far fa-adjust",
+                        iconClass: "fa fa-adjust",
                         active: this.invertedColorTheme,
                         do: () => this.invertColorTheme(),
                     },
                     {
                         id: "colorScaleScale",
                         name: "BinScale",
-                        iconClass: "far fa-arrows-h",
+                        iconClass: "fa fa-arrows-h",
                         when: () => this.codeBy.color &&
                             this.codeBy.color instanceof Attrib_Numeric &&
                             this.codeBy.color.supportsLogScale(),
@@ -16384,7 +16388,7 @@ class RecordDisplay {
                     {
                         id: "colorThemeSwitch",
                         name: "Switch (Seq. ↔ Div.)",
-                        iconClass: "far fa-exchange",
+                        iconClass: "fa fa-exchange",
                         do: () => this.setRecordColorTheme(this.browser.activeColorTheme === "sequential"
                             ? "diverging"
                             : "sequential"),
@@ -16392,7 +16396,7 @@ class RecordDisplay {
                     {
                         id: "colorThemeSequential",
                         name: "Sequential",
-                        iconClass: "far fa-long-arrow-right",
+                        iconClass: "fa fa-long-arrow-right",
                         do: (_, opt) => {
                             this.browser.colorTheme.sequential = opt;
                             this.setRecordColorTheme("sequential");
@@ -16443,7 +16447,7 @@ class RecordDisplay {
                     {
                         id: "colorThemeDiverging",
                         name: "Diverging",
-                        iconClass: "far fa-arrows-h",
+                        iconClass: "fa fa-arrows-h",
                         do: (_, opt) => {
                             this.browser.colorTheme.diverging = opt;
                             this.setRecordColorTheme("diverging");
@@ -16586,15 +16590,15 @@ class RecordDisplay {
                 .attr("class", "ChartControlGroupTitle")
                 .html(i18n.Zoom);
             _.append("span")
-                .attr("class", "visViewControlButton far fa-plus")
+                .attr("class", "visViewControlButton fa fa-plus")
                 .tooltip(i18n.ZoomIn)
                 .on("click", () => this.View.zoomIn());
             _.append("span")
-                .attr("class", "visViewControlButton far fa-minus")
+                .attr("class", "visViewControlButton fa fa-minus")
                 .tooltip(i18n.ZoomOut)
                 .on("click", () => this.View.zoomOut());
             _.append("span")
-                .attr("class", "visViewControlButton far fa-expand-arrows-alt")
+                .attr("class", "visViewControlButton fa fa-expand-arrows-alt")
                 .tooltip(i18n.ZoomToFit)
                 .on("click", () => this.View.zoomToFit());
         });
@@ -17232,7 +17236,7 @@ class RecordDisplay {
                     compare_Color = cX;
             });
             catColorText = `<div class='recordColorInfo'>
-        <span class='mapTooltipLabel'>${a.printName}</span>
+        <span class='mapTooltipLabel'>${a.attribName}</span>
         <div class='mapTooltipValue'><span class='colorBox bg_${compare_Color}'></span>${a.getRecordValue(record)}</div>
         </div>`;
         }
@@ -17291,7 +17295,7 @@ class RecordDisplay {
         // Value scale **********************
         // compute the min-max of the tooltip using the real record values
         var [value_min, value_max] = d3$3.extent(tsd, (_) => _._value);
-        var steadyValue;
+        var steadyValue = false;
         if (value_min === value_max) {
             steadyValue = value_min;
             value_min -= 0.0001;
@@ -17677,7 +17681,7 @@ class MapData {
 var mapStandardsMenuOpts = {
     id: "cat_addMap",
     name: "Add map",
-    iconClass: "far fa-globe",
+    iconClass: "fa fa-globe",
     when: (attrib) => attrib instanceof Attrib_Categorical && !attrib.catGeo,
     do: (attrib, action, path) => __awaiter(void 0, void 0, void 0, function* () {
         path = path.slice(path[1] === "World" ? 1 : 2);
@@ -19141,7 +19145,7 @@ class BreadCrumb {
                 : this.browser.DOM.breadCrumbs_Compare;
             this.DOM = parentDOM
                 .append("span")
-                .html(`<span class='breadCrumbIcon'><i class='fa fa-filter'></i><i class='far fa-times'></i></span>` +
+                .html(`<span class='breadCrumbIcon'><i class='fa fa-filter'></i><i class='fa fa-times'></i></span>` +
                 `<span class='crumbText'><span class='crumbHeader blockName'></span><span class='crumbDetails'></span></span>`)
                 .each((_, i, nodes) => {
                 if (this.selectType === "Filter") {
@@ -19239,7 +19243,7 @@ var MenuOpts = {
             {
                 id: "SetAttribPanelWidth",
                 name: "Set panel width",
-                iconClass: "far fa-arrows-h",
+                iconClass: "fa fa-arrows-h",
                 do: (dashboard) => {
                     var x = Modal.prompt("Enter width in pixels (between 200 and 400)", dashboard.attribPanelWidth);
                     if (x)
@@ -19255,7 +19259,7 @@ var MenuOpts = {
             {
                 id: "createTimeseries",
                 name: "Create Timeseries",
-                iconClass: "far fa-chart-line",
+                iconClass: "fa fa-chart-line",
                 when: () => true,
                 do: (groupInfo, action) => {
                     if (action === "prompt()") {
@@ -19314,7 +19318,7 @@ var MenuOpts = {
             {
                 id: "renameAttrib",
                 name: "Rename",
-                iconClass: "far fa-pencil",
+                iconClass: "fa fa-pencil",
                 helparticle: "5ea92f902c7d3a5ea54a1c35",
                 when: (attrib) => !attrib.hasTimeSeriesParent(),
                 do: (attrib) => {
@@ -19340,7 +19344,7 @@ var MenuOpts = {
             {
                 id: "setUnitName",
                 name: "Set unit-name",
-                iconClass: "far fa-ellipsis-h",
+                iconClass: "fa fa-ellipsis-h",
                 helparticle: "5e88f31404286364bc97d467",
                 when: (attrib) => (attrib.type === "timeseries" || attrib.type === "numeric") &&
                     !attrib.hasTimeSeriesParent(),
@@ -19359,7 +19363,7 @@ var MenuOpts = {
                     {
                         id: "cat_splitCat",
                         name: "Multi-Cat. (Split by)",
-                        iconClass: "far fa-tags",
+                        iconClass: "fa fa-tags",
                         helparticle: "5e88d4172c7d3a7e9aea63ac",
                         when: (attrib) => attrib instanceof Attrib_Categorical && !attrib.isMultiValued,
                         do: (attrib, action) => {
@@ -19412,7 +19416,7 @@ var MenuOpts = {
                     {
                         id: "num_convertToTimestamp",
                         name: "Timestamp",
-                        iconClass: "far fa-calendar-alt",
+                        iconClass: "fa fa-calendar-alt",
                         helparticle: "5e88ec2c04286364bc97d44b",
                         when: (attrib) => attrib instanceof Attrib_Numeric && !attrib.timeseriesParent,
                         do: (attrib, action) => {
@@ -19461,7 +19465,7 @@ var MenuOpts = {
                     {
                         id: "cat_convertToTimestamp",
                         name: "Timestamp",
-                        iconClass: "far fa-calendar",
+                        iconClass: "fa fa-calendar",
                         helparticle: "5e88ec2304286364bc97d44a",
                         when: (attrib) => attrib instanceof Attrib_Categorical &&
                             !attrib.isMultiValued &&
@@ -19540,7 +19544,7 @@ var MenuOpts = {
             {
                 id: "extractTimeKey",
                 name: "Extract time key",
-                iconClass: "far fa-calendar-day",
+                iconClass: "fa fa-calendar-day",
                 when: (attrib) => attrib instanceof Attrib_Timeseries,
                 options: (attrib) => attrib.timeKeys
                     .filter((timeKey) => !attrib.timeKeyAttribs[timeKey._time_src])
@@ -19585,7 +19589,7 @@ var MenuOpts = {
                     {
                         id: "time_deriveComponent",
                         name: "Time unit",
-                        iconClass: "far fa-calendar",
+                        iconClass: "fa fa-calendar",
                         when: (attrib) => attrib instanceof Attrib_Timestamp,
                         do: (attrib, action) => attrib.createDerivedAttrib(action),
                         // and time-typed in selected resolution,
@@ -19626,7 +19630,7 @@ var MenuOpts = {
                     {
                         id: "cat_deriveDegree",
                         name: "Degree (# of)",
-                        iconClass: "far fa-hashtag",
+                        iconClass: "fa fa-hashtag",
                         when: (attrib) => attrib instanceof Attrib_Categorical && attrib.isMultiValued && !attrib.derivatives.Degree,
                         do: (attrib) => attrib.createDerivedAttrib("Degree()"),
                     },
@@ -19656,13 +19660,13 @@ var MenuOpts = {
                     {
                         name: "Enable",
                         value: true,
-                        iconClass: "far fa-check",
+                        iconClass: "fa fa-check",
                         active: (attrib) => attrib.isComparable.is(true),
                     },
                     {
                         name: "Disable",
                         value: false,
-                        iconClass: "far fa-times",
+                        iconClass: "fa fa-times",
                         active: (attrib) => !attrib.isComparable.is(true),
                     },
                 ],
@@ -19689,13 +19693,13 @@ var MenuOpts = {
                             {
                                 name: "Enabled",
                                 value: true,
-                                iconClass: "far fa-check",
+                                iconClass: "fa fa-check",
                                 active: (attrib) => attrib.supportedMetricFuncs.includes("Avg"),
                             },
                             {
                                 name: "Disabled",
                                 value: false,
-                                iconClass: "far fa-times",
+                                iconClass: "fa fa-times",
                                 active: (attrib) => !attrib.supportedMetricFuncs.includes("Avg"),
                             },
                         ],
@@ -19714,13 +19718,13 @@ var MenuOpts = {
                             {
                                 name: "Enabled",
                                 value: true,
-                                iconClass: "far fa-check",
+                                iconClass: "fa fa-check",
                                 active: (attrib) => attrib.supportedMetricFuncs.includes("Sum"),
                             },
                             {
                                 name: "Disabled",
                                 value: false,
-                                iconClass: "far fa-times",
+                                iconClass: "fa fa-times",
                                 active: (attrib) => !attrib.supportedMetricFuncs.includes("Sum"),
                             },
                         ],
@@ -19731,7 +19735,7 @@ var MenuOpts = {
             {
                 id: "removeMap",
                 name: "Remove map",
-                iconClass: "far fa-undo",
+                iconClass: "fa fa-undo",
                 when: (attrib) => attrib instanceof Attrib_Categorical && attrib.catGeo !== null,
                 do: (attrib) => attrib.removeCatGeo(),
             },
@@ -19739,7 +19743,7 @@ var MenuOpts = {
             {
                 id: "removeDerive",
                 name: "Remove derivation",
-                iconClass: "far fa-undo",
+                iconClass: "fa fa-undo",
                 when: (attrib) => attrib.template.special,
                 do: (attrib) => attrib.destroy(),
             },
@@ -19747,7 +19751,7 @@ var MenuOpts = {
             {
                 id: "removeRecordGeo",
                 name: "Remove record geography",
-                iconClass: "far fa-undo",
+                iconClass: "fa fa-undo",
                 when: (attrib) => attrib instanceof Attrib_RecordGeo,
                 do: (attrib) => {
                     attrib.destroy();
@@ -19758,7 +19762,7 @@ var MenuOpts = {
             {
                 id: "removeModification",
                 name: "Remove modification",
-                iconClass: "far fa-undo",
+                iconClass: "fa fa-undo",
                 when: (attrib) => !!attrib.browser.onLoad.main[attrib.template.str],
                 do: (attrib) => {
                     var name = attrib.template.str;
@@ -19771,7 +19775,7 @@ var MenuOpts = {
             {
                 id: "setAsRecordID",
                 name: "Set as record ID",
-                iconClass: "far fa-fingerprint",
+                iconClass: "fa fa-fingerprint",
                 when: (attrib) => {
                     if (attrib.attribName === attrib.browser.idSummaryName)
                         return false;
@@ -19808,11 +19812,10 @@ class Panel {
         return this.attribs.length === 0;
     }
     get blocks() {
-        return this.attribs.map(attrib => attrib.block);
+        return this.attribs.map((attrib) => attrib.block);
     }
     get attribs_Categorical() {
-        // filter using typeguard
-        return this.attribs.filter((attrib) => attrib instanceof Attrib_Categorical);
+        return this.attribs.filter((_) => _ instanceof Attrib_Categorical);
     }
     /** -- */
     constructor(browser, name, parentDOM) {
@@ -19843,19 +19846,18 @@ class Panel {
         this.initDOM_AdjustWidth();
         this.addDOM_DropZone();
         this.refreshBlocksDropZonesOrder();
-        let targetWidth = this.browser.width_Canvas;
-        if (this.name !== "bottom")
-            targetWidth /= 3;
-        this.setWidth(targetWidth);
+        this.setWidth(this.browser.width_Canvas / 3);
     }
     get name() {
         return this._name;
     }
     /** -- If there's enough space, the panel welcomes new blocks */
     welcomesNewBlock() {
-        return (this.isEmpty()
-            || this.blocks.length < Math.floor(this.height / 150)
-            || this.heightRemaining > 0);
+        if (this.isEmpty())
+            return true;
+        if (this.blocks.length < Math.floor(this.height / 150))
+            return true;
+        return this.heightRemaining >= 0;
     }
     /** -- */
     get width_CatText() {
@@ -19873,9 +19875,8 @@ class Panel {
         return this._width_CatMeasureLabel;
     }
     get width_Real_withGap() {
-        if (this.width_Real === 0) {
+        if (this.width_Real === 0)
             return 0;
-        }
         if (this.name === "left" || this.name === "right") {
             return this.hasBlocks() ? this.width_Real + Base.width_PanelGap : 0;
         }
@@ -19891,22 +19892,21 @@ class Panel {
         if (this.name === "bottom") {
             return this.browser.width_Canvas;
         }
-        if (this.isEmpty()) {
+        if (this.isEmpty())
             return 0;
-        }
         if (this.isCollapsed()) {
             return this.DOM.root.node().offsetWidth;
         }
         return this.width_CatText + this.width_CatBars + Base.width_ScrollBar; // 8 pixels of gap
     }
     /** Adjusts width_CatBar based on previous size as well */
-    set width_CatText(width) {
-        width = Math.max(Base.width_CatLabelMin, width); // must be at least a specific min-value.
-        if (width === this.width_CatText)
+    set width_CatText(_w_) {
+        _w_ = Math.max(Base.width_CatLabelMin, _w_); // use at least 110 pixels for the category label.
+        if (_w_ === this.width_CatText)
             return;
-        let widthDif = this.width_CatText - width;
-        this._width_CatText = width;
-        this.attribs_Categorical.forEach(attrib => attrib.block.refreshLabelWidth());
+        var widthDif = this.width_CatText - _w_;
+        this._width_CatText = _w_;
+        this.attribs_Categorical.forEach((attrib) => attrib.block.refreshLabelWidth());
         // updates category bar widths
         this.width_CatBars = this.width_CatBars + widthDif;
     }
@@ -19915,26 +19915,26 @@ class Panel {
         return this._width_CatBars;
     }
     /** -- */
-    set width_CatBars(width) {
-        width = Math.max(width, 0); // cannot be negative
-        this._width_CatBars = width;
+    set width_CatBars(_w_) {
+        _w_ = Math.max(_w_, 0); // cannot be negative
+        this._width_CatBars = _w_;
         this.DOM.root.classed("hideCatBars", this.hiddenCatBars() ? true : false);
         this.refreshWidth();
     }
     /** -- */
-    setWidth(width) {
-        this.width_CatBars = width - this.width_CatText - Base.width_ScrollBar;
+    setWidth(_w_) {
+        this.width_CatBars = _w_ - this.width_CatText - Base.width_ScrollBar;
     }
     /** --- */
     refreshWidth() {
         this.DOM.root.style("width", this.width_Real + "px");
-        this.attribs.forEach(attrib => attrib.block.refreshWidth());
+        this.attribs.forEach((_) => _.block.refreshWidth());
     }
     /** --- */
     updateWidth_CatMeasureLabels() {
         // even if width is the same, stacked/not-stacked may have changed
         this._width_CatMeasureLabel = this.calcWidth_MeasureLabel();
-        this.attribs_Categorical.forEach(attrib => attrib.block.refreshLabelWidth());
+        this.attribs_Categorical.forEach((attrib) => attrib.block.refreshLabelWidth());
     }
     /** -- */
     hiddenCatBars() {
@@ -20090,20 +20090,20 @@ class Panel {
             this.browser.DOM.panel_Wrapper.classed("panel_bottom_empty", !this.hasBlocks());
         }
         this.refreshSharedMeasureExtent();
-        this.attribs.forEach(attrib => attrib.updateChartScale_Measure());
+        this.attribs.forEach((attrib) => attrib.updateChartScale_Measure());
     }
     /** -- */
     refreshBlocksDropZonesOrder() {
         this.attribs.forEach((attrib, i) => {
             attrib.block.orderInPanel = i;
         });
-        this.DOM.root.selectAll(".dropZone").each(function (_, i) {
+        this.DOM.root.selectAll(".dropZone").each(function (d, i) {
             this.__data__ = i;
         });
     }
     /** Adds the dropZone DOM BEFORE the provided dom-- */
     addDOM_DropZone(beforeDOM = null) {
-        let zone;
+        var zone;
         if (beforeDOM) {
             zone = this.DOM.root.insert("div", () => beforeDOM); // must be a function returning a dom object...
         }
@@ -20256,18 +20256,20 @@ class Panel {
     // Collapsing panel
     // ********************************************************************
     /** -- */
-    collapseAllSummaries(except) {
-        this.attribs.forEach(attrib => attrib.block.setCollapsed(attrib !== except));
+    collapseAllSummaries(exceptThisOne) {
+        this.attribs.forEach((_) => _.block.setCollapsed(_ !== exceptThisOne));
         this.browser.updateLayout_Height();
     }
     /** -- */
     isCollapsed() {
-        return this.hasBlocks() && this.attribs.every(attrib => attrib.block.collapsed);
+        if (this.name === "bottom")
+            return false;
+        return this.hasBlocks() && this.attribs.every((_) => _.block.collapsed);
     }
     /** -- */
     refreshCollapsed() {
-        let _old = this.DOM.root.classed("collapsed");
-        let _new = this.isCollapsed();
+        var _old = this.DOM.root.classed("collapsed");
+        var _new = this.isCollapsed();
         this.DOM.root.classed("collapsed", _new);
         this.refreshWidth();
         if (_old !== _new) {
@@ -20276,13 +20278,13 @@ class Panel {
     }
     /** -- */
     refreshSharedMeasureExtent() {
-        let scales = this.attribs
-            .filter(attrib => (attrib instanceof Attrib_Categorical && attrib.block.isView_List) ||
-            (attrib instanceof Attrib_Interval && attrib.block.showHistogram.is(true)))
-            .map(attrib => attrib.measureExtent_Self);
+        var scales = this.attribs
+            .filter((s) => (s instanceof Attrib_Categorical && s.block.isView_List) ||
+            (s instanceof Attrib_Interval && s.block.showHistogram.is(true)))
+            .map((s) => s.measureExtent_Self);
         this._syncedMeasureExtent = [
-            d3$2.min(scales, (range) => range[0]),
-            d3$2.max(scales, (range) => range[1]),
+            d3$2.min(scales, (_) => _[0]),
+            d3$2.max(scales, (_) => _[1]),
         ];
     }
     /** -- */
@@ -20763,12 +20765,10 @@ class Attrib_Content extends Attrib {
     }
     /** -- */
     isEmpty() {
-        var _a;
-        return !(((_a = this._content) === null || _a === void 0 ? void 0 : _a.length) > 0);
+        return this._content.length > 0;
     }
     isMultiStep() {
-        var _a;
-        return ((_a = this._content) === null || _a === void 0 ? void 0 : _a.length) > 1;
+        return this._content.length > 1;
     }
     /** -- */
     applyConfig(blockCfg) {
@@ -20777,7 +20777,7 @@ class Attrib_Content extends Attrib {
         });
         return __awaiter(this, void 0, void 0, function* () {
             _super.applyConfig.call(this, blockCfg);
-            this.setContent(blockCfg.content);
+            this.setContent(blockCfg._content);
             this.block.height_max = blockCfg.maxHeight;
             this.block.height_min = blockCfg.minHeight;
             this.block.onStep = blockCfg.onStep;
@@ -20903,10 +20903,6 @@ class RecordDetailPopup {
     /** -- */
     updateRecordDetailPanel(record) {
         var _a;
-        if (record == null) {
-            this.closeRecordDetailPanel();
-            return;
-        }
         this.recordInDetail = record;
         this.DOM.overlay_wrapper
             .attr("show", "recordDetails")
@@ -21092,7 +21088,7 @@ class RecordDetailPopup {
                     recAttribName
                         .filter((attrib) => attrib.description)
                         .append("span")
-                        .attr("class", "summaryDescription far fa-info-circle")
+                        .attr("class", "summaryDescription fa fa-info-circle")
                         .tooltip((_) => _.description, { placement: "bottom" });
                     recAttribName
                         .append("span")
@@ -21229,8 +21225,8 @@ class RecordDetailPopup {
             renderRecordValues(_tbody, outline._timeseries, []);
             this.updateFocusedTimeKey(this.recordDetailTimeKeys[0]);
         }
-        // Some Keshif projects use this to inject some code after main record display view.
-        (_a = this.browser["updateRecordDetailPanel_custom"]) === null || _a === void 0 ? void 0 : _a.call(this, record);
+        // Some random Keshif project uses this to inject some code after main record display view. Hmmm...
+        (_a = this["updateRecordDetailPanel_custom"]) === null || _a === void 0 ? void 0 : _a.call(this, record);
     }
     /** -- */
     updateFocusedTimeKey(timeKey) {
@@ -21305,8 +21301,8 @@ class RecordDetailPopup {
                     diff *= -1; // flip
             }
             if (diff !== null) {
-                let domain = attrib.timeSeriesScale_Value.domain();
-                let threshold = Math.abs(domain[1] - domain[0]) / 50; // 1/50th of the range is the signal of change
+                var threshold = attrib.timeSeriesScale_Value.domain();
+                threshold = Math.abs(threshold[1] - threshold[0]) / 50; // 1/50th of the range is the signal of change
                 // TODO: make this a parameter
                 if (diff > threshold) {
                     status = "improve";
@@ -21434,11 +21430,11 @@ function applyPreProc(_key, _transform, recordList) {
     }
     let transformFunc = null;
     /* jshint ignore:start */
-    const isTimeseries = RegExp(/(.+)->\$\{(.+)\}/).exec(_transform);
-    const isDateTime = RegExp("DATETIME\\((.+)\\)").exec(_transform);
-    const isMultiVal = RegExp("MULTIVAL\\((.+)\\)").exec(_transform);
-    const isSplit = RegExp("SPLIT\\((.+)\\)").exec(_transform);
-    const isLatLong = RegExp("LAT_LONG\\((.+),(.+)\\)").exec(_transform);
+    var isTimeseries = RegExp(/(.+)->\$\{(.+)\}/).exec(_transform);
+    var isDateTime = RegExp("DATETIME\\((.+)\\)").exec(_transform);
+    var isMultiVal = RegExp("MULTIVAL\\((.+)\\)").exec(_transform);
+    var isSplit = RegExp("SPLIT\\((.+)\\)").exec(_transform);
+    var isLatLong = RegExp("LAT_LONG\\((.+),(.+)\\)").exec(_transform);
     /* jshint ignore:end */
     if (_transform === "STR()") {
         // convert value to string
@@ -21487,13 +21483,14 @@ function applyPreProc(_key, _transform, recordList) {
     }
     else if (isMultiVal && isMultiVal.length > 1) {
         // merge data from multiple columns
-        const colNames = isMultiVal[1]
-            .split(RegExp("\\s*;\\s*"))
+        var splitExpr = RegExp("\\s*;\\s*");
+        var colNames = isMultiVal[1]
+            .split(splitExpr)
             .map((x) => x.trim())
             .filter((x) => x !== "");
         if (colNames.length >= 2) {
             transformFunc = (v, r) => {
-                let _return = [];
+                var _return = [];
                 colNames.forEach((c) => {
                     if (r[c]) {
                         _return.push(r[c]);
@@ -21507,7 +21504,7 @@ function applyPreProc(_key, _transform, recordList) {
     else if (isTimeseries && isTimeseries.length > 1) {
         // prepare timeseries structure
         var _isDateTime = RegExp("DATETIME\\((.+)\\)").exec(isTimeseries[2]);
-        if ((_isDateTime === null || _isDateTime === void 0 ? void 0 : _isDateTime.length) > 1) {
+        if (_isDateTime && _isDateTime.length > 1) {
             var __timeParse = Util.getTimeParseFunc(_isDateTime[1]);
             var valueKey = null;
             var hasValueKey = RegExp("::(.+)").exec(isTimeseries[2]);
@@ -21540,7 +21537,7 @@ function applyPreProc(_key, _transform, recordList) {
     }
     if (transformFunc) {
         recordList.forEach((r) => {
-            let host = keyHostFunc(r.data);
+            var host = keyHostFunc(r.data);
             if (host == null)
                 return;
             try {
@@ -21553,8 +21550,8 @@ function applyPreProc(_key, _transform, recordList) {
         return;
     }
     if (isLatLong && isLatLong.length > 1) {
-        const latAttrib = isLatLong[1];
-        const lonAttrib = isLatLong[2];
+        var latAttrib = isLatLong[1];
+        var lonAttrib = isLatLong[2];
         recordList.forEach((r) => {
             var host = keyHostFunc(r.data);
             if (!host)
@@ -21630,50 +21627,50 @@ class Browser {
         this.dataTypeDescrs = [
             {
                 name: "Categorical",
-                icon: "far fa-font",
+                icon: "fa fa-font",
                 member: (attrib) => attrib instanceof Attrib_Categorical,
                 active: false,
             },
             {
                 name: "MultiValued",
-                icon: "far fa-tags",
+                icon: "fa fa-tags",
                 member: (attrib) => attrib instanceof Attrib_Categorical && attrib.isMultiValued,
                 active: false,
             },
             {
                 name: "Numeric",
-                icon: "far fa-hashtag",
+                icon: "fa fa-hashtag",
                 member: (attrib) => attrib instanceof Attrib_Numeric,
                 active: false,
             },
             {
                 name: "Timestamp",
-                icon: "far fa-calendar-day",
+                icon: "fa fa-calendar-day",
                 member: (attrib) => attrib instanceof Attrib_Timestamp,
                 active: false,
             },
             {
                 name: "Timeseries",
-                icon: "far fa-chart-line",
+                icon: "fa fa-chart-line",
                 member: (attrib) => attrib instanceof Attrib_Timeseries,
                 active: false,
             },
             {
                 name: "Location",
-                icon: "far fa-map-marker",
+                icon: "fa fa-map-marker",
                 member: (attrib) => attrib instanceof Attrib_RecordGeo ||
                     (attrib instanceof Attrib_Categorical && attrib.hasMap()),
                 active: false,
             },
             {
                 name: "Unique",
-                icon: "far fa-fingerprint",
-                member: (attrib) => attrib instanceof Attrib_Categorical && attrib.uniqueCategories(),
+                icon: "fa fa-fingerprint",
+                member: (attrib) => attrib.uniqueCategories(),
                 active: false,
             },
             {
                 name: "Function",
-                icon: "fal fa-function",
+                icon: "fa fa-function",
                 member: (attrib) => !attrib.template.str,
                 active: false,
             },
@@ -21801,7 +21798,7 @@ class Browser {
             parent: this,
             cfgTitle: "Measure Attribute",
             cfgClass: "measureSummary",
-            iconClass: "far fa-cube",
+            iconClass: "fa fa-cube",
             default: null,
             helparticle: "5e9516452c7d3a7e9aeae06e",
             onDOM: (DOM) => {
@@ -21869,7 +21866,7 @@ class Browser {
             parent: this,
             cfgTitle: "Breakdown",
             cfgClass: "breakdownMode",
-            iconClass: "far fa-percent",
+            iconClass: "fa fa-percent",
             default: "absolute",
             helparticle: "5e89445604286364bc97d5eb",
             tooltip: `How to compute and compare data groups`,
@@ -21898,7 +21895,7 @@ class Browser {
                 this.addedCompare = false;
                 for (let attrib of this.attribsInDashboard) {
                     yield attrib.axisScaleType.set(v === "relative" ? "full" : "fit");
-                    attrib.refreshChartScale_Measure();
+                    attrib.refreshScale_Measure();
                 }
                 yield this.refreshAnalytics();
                 this.preventAxisScaleTransition = false;
@@ -21980,7 +21977,7 @@ class Browser {
                 return v;
             }),
             onSet: () => __awaiter(this, void 0, void 0, function* () {
-                this.attribsInDashboard.forEach((attrib) => attrib.refreshChartScale_Measure());
+                this.attribsInDashboard.forEach((attrib) => attrib.refreshScale_Measure());
                 yield this.refreshAnalytics();
             }),
         });
@@ -22034,7 +22031,7 @@ class Browser {
             parent: this,
             cfgTitle: "Filtering",
             cfgClass: "filteringMode",
-            iconClass: "fal fa-filter",
+            iconClass: "fa fa-filter",
             UISeperator: {
                 title: "Selections",
             },
@@ -22062,7 +22059,7 @@ class Browser {
             parent: this,
             cfgTitle: "Hover Highlight",
             cfgClass: "mouseOverCompare",
-            iconClass: "fal fa-mouse-pointer",
+            iconClass: "fa fa-mouse-pointer",
             default: true,
             helparticle: "5e8905c52c7d3a7e9aea6489",
             itemOptions: [
@@ -22074,7 +22071,7 @@ class Browser {
             parent: this,
             cfgTitle: "Record Chart Type",
             cfgClass: "recordChartType",
-            iconClass: "fal fa-bullseye",
+            iconClass: "fa fa-bullseye",
             UISeperator: {
                 title: "Record Chart",
             },
@@ -22323,9 +22320,10 @@ class Browser {
         this.insertDOM_Panel_Overlay();
         this.insertDOM_AttribPanel();
         this.DOM.panel_Wrapper = this.DOM.root
+            //.append("div").attr("class","panel_Data_Wrapper")
             .append("div")
             .attr("class", "panel_Wrapper")
-            .classed("emptyDashboard", true)
+            .classed("emptyDashboard", true) // empty dashboard by default on initialization.
             .classed("panel_bottom_empty", true);
         this.insertDOM_PanelBasic();
         this.dashboardConfigPanel = new ConfigPanel(this.DOM.panel_Wrapper, "DashboardAnalyticsConfig", "DashboardAnalyticsConfig", Object.values(this.configs), this, this.DOM.metricFuncSelectButton);
@@ -22680,7 +22678,7 @@ class Browser {
     insertDOM_Panel_DatasetInfo() {
         this.DOM.datasource = this.DOM.browserDescription
             .append("a")
-            .attr("class", "fal fa-table datasource")
+            .attr("class", "fa fa-table datasource")
             .attr("target", "_blank")
             .tooltip(i18n.OpenDataSource);
         this.DOM.browserDescription
@@ -22737,23 +22735,23 @@ class Browser {
             .data([
             {
                 name: "Explore",
-                class: "far fa-compass",
+                class: "fa fa-compass",
             },
             {
                 name: "Author",
-                class: "far fa-pen-fancy",
+                class: "fa fa-pen-fancy",
             },
             {
                 name: "Adjust",
-                class: "far fa-sliders-h",
+                class: "fa fa-sliders-h",
             },
             {
                 name: "Capture",
-                class: "far fa-draw-square",
+                class: "fa fa-draw-square",
             },
             {
                 name: "Save",
-                class: "far fa-bookmark",
+                class: "fa fa-bookmark",
             },
         ])
             .enter()
@@ -22799,7 +22797,7 @@ class Browser {
             .attr("class", "panel_DataStatus");
         this.DOM.metricFuncSelectButton = this.DOM.panel_DataStatus
             .append("span")
-            .attr("class", "metricFuncSelectButton basicIcon fal fa-cog")
+            .attr("class", "metricFuncSelectButton basicIcon fa fa-cog")
             .tooltip(i18n.DashboardAnalyticsConfig)
             .on("click", () => this.dashboardConfigPanel.showAtPos(8, 8));
         this.DOM.recordInfo = this.DOM.panel_DataStatus
@@ -22817,7 +22815,7 @@ class Browser {
             "<select class='measureFuncOptions metricOptionWrapper_Opts'></select>" +
             "</span>" +
             "<span class='timeKeys metricOptionWrapper'>" +
-            "<i class='fal fa-calendar'></i>" +
+            "<i class='fa fa-calendar'></i>" +
             "<span class='timeKeyText metricOptionWrapper_Text'></span>" +
             "<select class='timeKeys metricOptionWrapper_Opts'></select>" +
             "</span>" +
@@ -22884,7 +22882,7 @@ class Browser {
             .call((rightSideIcons) => {
             rightSideIcons
                 .append("div")
-                .attr("class", "viewFullscreen basicIcon far fa-expand-arrows-alt")
+                .attr("class", "viewFullscreen basicIcon fa fa-expand-arrows-alt")
                 .tooltip(i18n.ShowFullscreen)
                 .on("click", () => this.showFullscreen());
             if (this.dashZoomLevel !== "1.00") {
@@ -22896,13 +22894,13 @@ class Browser {
             }
             rightSideIcons
                 .append("div")
-                .attr("class", "showHelpIn basicIcon fal fa-question-circle")
+                .attr("class", "showHelpIn basicIcon fa fa-question-circle")
                 .tooltip(i18n.Help)
                 .on("click", () => Modal.helpUI());
         });
         dashboardSettings
             .append("span")
-            .attr("class", "dashboardSetting breakdownModeIcon far fa-percent")
+            .attr("class", "dashboardSetting breakdownModeIcon fa fa-percent")
             .tooltip("", {
             onShow: (instance) => {
                 instance.reference.tippy.setContent(`<div>${i18n["Breakdown"]}</div>
@@ -22917,7 +22915,7 @@ class Browser {
                     {
                         id: "absoluteBreakdown",
                         name: "Absolute",
-                        iconClass: "far fa-hashtag",
+                        iconClass: "fa fa-hashtag",
                         helparticle: "5e8944682c7d3a7e9aea659a",
                         active: this.breakdownMode.is("absolute"),
                         do: () => __awaiter(this, void 0, void 0, function* () { return yield this.breakdownMode.set("absolute"); }),
@@ -22925,7 +22923,7 @@ class Browser {
                     {
                         id: "percentBreakdown",
                         name: "Percentage",
-                        iconClass: "far fa-percent",
+                        iconClass: "fa fa-percent",
                         expanded: true,
                         options: [
                             {
@@ -22982,7 +22980,7 @@ class Browser {
                 .on("click", () => this.clearFilters_All());
             breadCrumbs_Filter
                 .append("div")
-                .attr("class", "breadCrumbCollapseControl far fa-angle-double-right")
+                .attr("class", "breadCrumbCollapseControl fa fa-angle-double-right")
                 .tooltip("", {
                 onTrigger: (instance) => {
                     instance.reference.tippy.setContent(i18n[(breadCrumbs_Filter.node().classList.contains("collapsed")
@@ -23074,12 +23072,12 @@ class Browser {
             .enter()
             .append("span")
             .attr("class", (d) => "spinner_x spinner_" + d);
-        var status_text = this.DOM.loadingBox.append("div").attr("class", "status_text");
-        status_text
+        var hmmm = this.DOM.loadingBox.append("div").attr("class", "status_text");
+        hmmm
             .append("span")
             .attr("class", "status_text_sub info")
             .html(i18n.LoadingData);
-        status_text
+        this.DOM.status_text_sub_dynamic = hmmm
             .append("span")
             .attr("class", "status_text_sub dynamic");
         // CREDITS
@@ -23112,7 +23110,7 @@ class Browser {
   <a class='creditsLink' target='_blank' href='https://keshif.me/Privacy'>Privacy Policy</a>
   <a class='creditsLink' target='_blank' href='https://keshif.me/License'>Other Licenses</a>
 </div>
-<div class='copyright'>© Keshif, LLC 203. All rights reserved.</div>
+<div class='copyright'>© Keshif, LLC 2022. All rights reserved.</div>
 `);
         this.creditsInserted = true;
     }
@@ -23197,7 +23195,7 @@ class Browser {
         this.DOM.authoringPanel.style("width", this._attribPanelWidth + "px");
         // ****************************************************************************
         // ***************************************************************************
-        var attributeInfo = this.helper_AddSidePanelGroup("attributePanel", `<i class='panelIcon fal fa-cube'></i> ${i18n.Attributes}`, "<b>Author</b> your dashboard<br> using dataset attributes");
+        var attributeInfo = this.helper_AddSidePanelGroup("attributePanel", `<i class='panelIcon fa fa-cube'></i> ${i18n.Attributes}`, "<b>Author</b> your dashboard<br> using dataset attributes");
         attributeInfo
             .append("div")
             .attr("class", "panelAdjustWidth")
@@ -23237,7 +23235,7 @@ class Browser {
         var attributePanelControl;
         attributePanelFilters
             .append("div")
-            .attr("class", "filterTypeButton attribTextSearchIcon far fa-search")
+            .attr("class", "filterTypeButton attribTextSearchIcon fa fa-search")
             .on("click", (event) => {
             event.currentTarget.classList.toggle("active");
             attributePanelControl.node().classList.toggle("active");
@@ -23245,7 +23243,7 @@ class Browser {
         });
         attributePanelFilters
             .append("div")
-            .attr("class", "filterTypeButton attribListConfiguration fal fa-cog")
+            .attr("class", "filterTypeButton attribListConfiguration fa fa-cog")
             .tooltip(i18n.Configure, { placement: "bottom" })
             .on("click", (event) => Modal.popupMenu(event, MenuOpts.AttribPanel, this));
         attributePanelControl = attributeInfo
@@ -23291,7 +23289,7 @@ class Browser {
         this.DOM.boostButton = attributeInfo
             .append("div")
             .attr("class", "boostButton")
-            .html("<i class='fal fa-rocket-launch'></i> Boost")
+            .html("<i class='fa fa-rocket-launch'></i> Boost")
             .tooltip("Auto-boost dashboard")
             .on("click", () => this.runMagic());
     }
@@ -23381,17 +23379,17 @@ class Browser {
                         let a = _.item;
                         if (a.attribName === this.idSummaryName) {
                             Y.append("div")
-                                .attr("class", "summaryRecordIDIcon far fa-fingerprint")
+                                .attr("class", "summaryRecordIDIcon fa fa-fingerprint")
                                 .tooltip(i18n["Record ID"], { placement: "bottom" });
                         }
                         if (a.type === "categorical") {
                             Y.append("div")
-                                .attr("class", "summaryMultiCat far fa-tags")
+                                .attr("class", "summaryMultiCat fa fa-tags")
                                 .tooltip(i18n.MultiValued, { placement: "bottom" });
                         }
                         // no descriptions of simple groups currently
                         Y.append("div")
-                            .attr("class", "summaryDescription far fa-info-circle")
+                            .attr("class", "summaryDescription fa fa-info-circle")
                             .classed("active", !!a.description)
                             .tooltip(a.description, { placement: "bottom" })
                             .on("click", function () {
@@ -23463,7 +23461,7 @@ class Browser {
     set loadedTableCount(v) {
         var _a;
         this._loadedTableCount = v;
-        (_a = this.DOM.root) === null || _a === void 0 ? void 0 : _a.select('.status_text_sub').text(`(${this._loadedTableCount} / ${this._totalTableCount})`);
+        (_a = this.DOM.status_text_sub_dynamic) === null || _a === void 0 ? void 0 : _a.text(`(${this._loadedTableCount} / ${this._totalTableCount})`);
     }
     get loadedTableCount() {
         return this._loadedTableCount;
@@ -23637,7 +23635,7 @@ class Browser {
         });
         if (hasLat && hasLong && !this.options.onLoad["_POINT"]) {
             potentialChanges.push({
-                i: '<i class="far fa-map-marker"></i>',
+                i: '<i class="fa fa-map-marker"></i>',
                 q: `(<b>${latKey}</b>, <b>${longKey}</b>) is the point location.`,
                 a: () => {
                     this.options.onLoad["_POINT"] = `LAT_LONG(${latKey},${longKey})`;
@@ -23666,7 +23664,7 @@ class Browser {
                     return;
                 }
                 potentialChanges.push({
-                    i: '<i class="far fa-calendar-day"></i>',
+                    i: '<i class="fa fa-calendar-day"></i>',
                     q: `Derive ${_opt.derivative} of <b>${attrib.attribName}</b>`,
                     a: () => {
                         newConfig.summaries.push({
@@ -23725,7 +23723,7 @@ class Browser {
         this.attribs.forEach((attrib) => {
             if (attrib instanceof Attrib_Numeric && isZipCode(attrib)) {
                 potentialChanges.push({
-                    i: '<i class="far fa-map-marker"></i>',
+                    i: '<i class="fa fa-map-marker"></i>',
                     q: `<b>${attrib.attribName}</b> is zipcode.`,
                     a: () => {
                         this.options.onLoad[attrib.template.str] = "STR()";
@@ -23804,7 +23802,7 @@ class Browser {
                 if (n <= allText.length / 20)
                     return;
                 potentialChanges.push({
-                    i: '<i class="far fa-tags"></i>',
+                    i: '<i class="fa fa-tags"></i>',
                     q: `<b>${attrib.attribName}</b> has multiple categories split by <b>${_.char}</b>`,
                     a: () => {
                         this.options.onLoad[attrib.template.str] = _.convert;
@@ -23833,7 +23831,7 @@ class Browser {
             var idCandidate = candidateSummaries[0];
             if (idCandidate) {
                 potentialChanges.push({
-                    i: "<i class='far fa-fingerprint'></i>",
+                    i: "<i class='fa fa-fingerprint'></i>",
                     q: `<b>${idCandidate.attribNameHTML}</b> is the unique fingerprint (ID) of the ${this.recordName}`,
                     a: () => {
                         newConfig.source.tables[0].id = idCandidate.template.str;
@@ -23968,12 +23966,11 @@ class Browser {
                 })();
             }
             ["left", "middle", "right"].forEach((side) => {
-                let deprecatedPanelLabelWidth = this.options[side + "PanelLabelWidth"];
-                if (deprecatedPanelLabelWidth) {
+                if (this.options[side + "PanelLabelWidth"]) {
                     if (!this.options.panels[side])
                         this.options.panels[side] = {};
                     this.options.panels[side].catLabelWidth =
-                        deprecatedPanelLabelWidth;
+                        this.options[side + "PanelLabelWidth"];
                 }
             });
             yield this.breakdownMode.set(this.options.breakdownMode);
@@ -24122,10 +24119,11 @@ class Browser {
             setTimeout(() => this.setNoAnim(false), 1000);
             this.chartsLoaded = true;
             if (this.options.recordInDetail) {
-                let record = Base.tables
+                var record = Base.tables
                     .get(this.primaryTableName)
                     .getRecord(this.options.recordInDetail);
-                this.recordDetailsPopup.updateRecordDetailPanel(record);
+                if (record)
+                    this.recordDetailsPopup.updateRecordDetailPanel(record);
             }
         });
     }
@@ -24141,7 +24139,7 @@ class Browser {
         this.movedAttrib = attrib;
         this.showDropZones = true;
         this.DOM.root.classed("showDropZone", true).attr("dropSource", dropSource);
-        this.DOM.attribDragBox.style("display", "block").html(attrib.printName);
+        this.DOM.attribDragBox.style("display", "block").html(attrib.attribName);
     }
     /** -- */
     clearDropZones() {
