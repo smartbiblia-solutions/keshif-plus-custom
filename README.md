@@ -22,9 +22,10 @@ reproduce the distributed build this fork starts from (see the first fork commit
 ## History
 
 1. Baseline: the pre-built Keshif+ distribution shared by Portic and DataLab.
-2. Portic corrections (see [CHANGES-PORTIC.md](CHANGES-PORTIC.md)). After this commit
-   `dist/` is byte-identical to Portic's `static/dist`.
+2. Portic corrections (see [CHANGES-PORTIC.md](CHANGES-PORTIC.md)): `dist/keshif.js`,
+   `keshif.min.js` and its map are byte-identical to Portic's `static/dist`.
 3. Host-application hooks, all opt-in (see below).
+4. `dist/assets/` (upstream's `.gitignore` excluded it), unchanged from the baseline.
 
 Each change is one commit; `git log -p dist/keshif.js` is the patch ledger.
 
