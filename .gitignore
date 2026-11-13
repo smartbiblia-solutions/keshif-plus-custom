@@ -1,5 +1,5 @@
 # Assets in dist directory
-dist/assets
+# dist/assets is committed in this fork (Font Awesome 6 Free and Leaflet images)
 src/assets/font-awesome
 
 # Local module dependencies
