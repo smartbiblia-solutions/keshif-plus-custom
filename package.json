@@ -13,7 +13,7 @@
     "visualization",
     "analytics"
   ],
-  "license": "AGPL-3.0-only",
+  "license": "SEE LICENSE IN NOTICE.md",
   "type": "module",
   "main": "./dist/keshif.js",
   "files": [

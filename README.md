@@ -1,3 +1,68 @@
+# keshif-plus-custom
+
+A maintained fork of [Keshif+](https://github.com/keshifme/keshif-plus) used by
+[explore1.portic](https://github.com/gegedenice/explore1.portic) and
+[DataLab Explorer](https://github.com/smartbiblia-solutions/datalab-explorer).
+Not an official Keshif release; see [NOTICE.md](NOTICE.md) for licensing.
+
+## What is here
+
+`dist/` is the deliverable: an ES module build that host applications copy as-is.
+
+| File | Role |
+|---|---|
+| `dist/keshif.js` | **Readable canonical source.** All fixes are made here. |
+| `dist/keshif.min.js` (+ `.map`) | Generated from `keshif.js` with `tools/` (terser 5.44.1). Never edit by hand. |
+| `dist/keshif.css`, `keshif.min.css`, `assets/` | Styles, Font Awesome 6 Free, Leaflet images |
+| `dist/vendor*.js`, `papaparse*.js` | Bundled dependencies, unchanged from the baseline |
+
+`src/` is upstream's TypeScript and is kept for reference only: it does not
+reproduce the distributed build this fork starts from (see the first fork commit).
+
+## History
+
+1. Baseline: the pre-built Keshif+ distribution shared by Portic and DataLab.
+2. Portic corrections (see [CHANGES-PORTIC.md](CHANGES-PORTIC.md)). After this commit
+   `dist/` is byte-identical to Portic's `static/dist`.
+3. Host-application hooks, all opt-in (see below).
+
+Each change is one commit; `git log -p dist/keshif.js` is the patch ledger.
+
+## Host options added by this fork
+
+```js
+import * as kshf from "./keshif.min.js";
+kshf.Base.loadWebFonts = false;          // skip the external Google WebFont request
+new kshf.Browser({
+  confirmLargeRecordView: false,         // no blocking modal above 5,000 records
+  minRecordViewHeight: 460,              // reserved height of the central view
+  onSelectionChange: (ids) => {},        // exact included record IDs after each filter change
+  recordDisplay: {
+    mapConfig: { emptyView: [[0, 0], 1] },  // view when no record has coordinates
+    scatterLabels: false, compactPointDOM: true,
+  },
+});
+browser.destroy();                       // unregister and remove a dashboard
+```
+
+## Making a change
+
+```bash
+cd tools && npm ci && npm run minify
+```
+
+Rules, so existing applications keep working:
+
+- Edit `dist/keshif.js` only, then regenerate the minified files; commit both together.
+- Defaults never change in a minor update. New behaviour is an option whose default is the
+  previous behaviour; option names and exports are never renamed or removed.
+- Before a consumer upgrades, run its test suite against the new `dist/`
+  (for Portic: `npm test` and the browser suites `explore`, `urls`, `record-views`,
+  `view-lifecycle`), and check that the included record IDs for fixed filters are unchanged.
+- Consumers pin an exact commit or tag and upgrade deliberately.
+
+----
+
 # keshif-plus
 
 Keshif+ is the rapid visual data exploration web app for structured tabular data.
