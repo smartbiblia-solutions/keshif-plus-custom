@@ -1,0 +1,11 @@
+{
+  "name": "keshif-plus-custom-tools",
+  "private": true,
+  "description": "Pinned tool used to regenerate dist/keshif.min.js from the readable dist/keshif.js",
+  "scripts": {
+    "minify": "cd .. && terser dist/keshif.js --module --compress --mangle --source-map url=keshif.min.js.map,includeSources --output dist/keshif.min.js"
+  },
+  "devDependencies": {
+    "terser": "5.44.1"
+  }
+}

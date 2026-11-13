@@ -124,7 +124,8 @@ class kshfBase {
                     return;
                 // Load common fonts
                 window["WebFontConfig"] = this.WebFontConfig;
-                try {
+                // Set kshf.loadWebFonts = false to skip the external request entirely.
+                if (this.loadWebFonts !== false) try {
                     yield import('https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js');
                 } catch (_) {
                     // Fonts are optional; layout and resize handlers must still work offline.
@@ -6501,8 +6502,9 @@ class Attrib_RecordGeo extends Attrib {
             if (this.pointClusterRadius === 0) {
                 return;
             }
-            if (!Supercluster) {
-                Supercluster = yield import('./vendor_mapping.js').then(function (n) { return n.s; });
+            if (typeof Supercluster === "undefined") {
+                // UMD side effect defines globalThis.Supercluster; the ES export is an empty namespace.
+                yield import('./vendor_mapping.js');
             }
             this.PointCluster = new Supercluster({
                 radius: this.pointClusterRadius,
@@ -6520,7 +6522,7 @@ class Attrib_RecordGeo extends Attrib {
                     geometry,
                 });
             });
-            this.PointCluster.load(points);
+            this.PointCluster.load(points.filter(p => p.geometry.type === "Point" && p.geometry.coordinates.every(Number.isFinite)));
         });
     }
     updateClusters(_bounds, zoom) {
@@ -13238,13 +13240,19 @@ class RecordView_Map extends RecordView {
         }
         var bounds = this.geoAttrib.getRecordBounds(true);
         if (!bounds.isValid()) {
-            if (!this.leafletRecordMap._loaded) this.leafletRecordMap.setView([43.3, 5.37], 4);
+            if (!this.leafletRecordMap._loaded) this.setEmptyView();
             return;
         }
         this.zoomToBounds(Util.addMarginToBounds(bounds));
     }
     /** -- */
+    /** mapConfig.emptyView = [[lat, lng], zoom] is used when there is nothing to fit. */
+    setEmptyView() {
+        var _v = (this.mapConfig && this.mapConfig.emptyView) || [[43.3, 5.37], 4];
+        this.leafletRecordMap.setView(_v[0], _v[1]);
+    }
     zoomToBounds(bounds) {
+        if (!bounds || !bounds.isValid()) { this.setEmptyView(); return; }
         this.rd.DOM.recordDisplayWrapper.classed("dragging", true);
         this.leafletRecordMap.fitBounds(bounds);
     }
@@ -16221,7 +16229,7 @@ class RecordDisplay {
         });
     }
     getMaxSizeScaleRange() {
-        if (this.codeBy.size === null) return this.recordPointSize.get();
+        if (this.codeBy.size == null) return this.recordPointSize.get();
         if (this.codeBy.size === "_measure_" && this.isPointMap()) {
             return Math.max(10, Math.min(this.recordPointSize.get(), this.codeBy.geo.pointClusterRadius / 2));
         }
@@ -22628,6 +22636,20 @@ class Browser {
     getDashboardID() {
         return window.location.pathname + this.domID;
     }
+    /** Unregisters this dashboard, removes its tooltips/transitions/DOM. Not reusable afterwards. */
+    destroy() {
+        var _a;
+        this.finalized = false;
+        delete Base.browsers[this.getDashboardID()];
+        if (this.primaryTableName) Base.tables.delete(this.primaryTableName);
+        var root = (_a = this.DOM) === null || _a === void 0 ? void 0 : _a.root;
+        if (!root) return;
+        root.node().querySelectorAll("*").forEach((el) => {
+            if (el._tippy) el._tippy.destroy();
+        });
+        root.selectAll("*").interrupt();
+        root.selectAll("*").remove();
+    }
     /* -- */
     insertDOM_WarningBox() {
         this.panel_warningBox = this.DOM.root
@@ -24289,6 +24311,9 @@ class Browser {
         this.refresh_filterClearAll();
         this.filteringMode.refresh();
         this.needToRefreshLayout = true;
+        // Optional hook: receives the exact IDs of included records after each filter change.
+        if (this.options.onSelectionChange)
+            this.options.onSelectionChange(this.records.filter((r) => r.isIncluded).map((r) => String(r.id)));
     }
     refreshAnalytics() {
         var _a, _b, _c;
